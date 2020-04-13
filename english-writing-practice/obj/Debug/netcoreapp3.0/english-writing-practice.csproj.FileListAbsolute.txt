@@ -1,0 +1,11 @@
+C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\bin\Debug\netcoreapp3.0\english-writing-practice.exe
+C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\bin\Debug\netcoreapp3.0\english-writing-practice.deps.json
+C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\bin\Debug\netcoreapp3.0\english-writing-practice.runtimeconfig.json
+C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\bin\Debug\netcoreapp3.0\english-writing-practice.runtimeconfig.dev.json
+C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\bin\Debug\netcoreapp3.0\english-writing-practice.dll
+C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\bin\Debug\netcoreapp3.0\english-writing-practice.pdb
+C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\obj\Debug\netcoreapp3.0\english-writing-practice.csprojAssemblyReference.cache
+C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\obj\Debug\netcoreapp3.0\english-writing-practice.AssemblyInfoInputs.cache
+C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\obj\Debug\netcoreapp3.0\english-writing-practice.AssemblyInfo.cs
+C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\obj\Debug\netcoreapp3.0\english-writing-practice.dll
+C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\obj\Debug\netcoreapp3.0\english-writing-practice.pdb
