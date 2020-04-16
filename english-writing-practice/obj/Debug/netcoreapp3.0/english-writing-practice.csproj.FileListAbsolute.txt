@@ -9,3 +9,13 @@ C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\
 C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\obj\Debug\netcoreapp3.0\english-writing-practice.AssemblyInfo.cs
 C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\obj\Debug\netcoreapp3.0\english-writing-practice.dll
 C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\obj\Debug\netcoreapp3.0\english-writing-practice.pdb
+C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Configuration.dll
+C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Configuration.FileExtensions.dll
+C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Configuration.Ini.dll
+C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\bin\Debug\netcoreapp3.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\bin\Debug\netcoreapp3.0\Microsoft.Extensions.FileProviders.Physical.dll
+C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\bin\Debug\netcoreapp3.0\Microsoft.Extensions.FileSystemGlobbing.dll
+C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Primitives.dll
+C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\bin\Debug\netcoreapp3.0\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\obj\Debug\netcoreapp3.0\english-writing-practice.csproj.CopyComplete
