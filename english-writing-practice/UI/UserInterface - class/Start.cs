@@ -12,22 +12,27 @@ namespace Treynessen.UI
             controlTask = Task.Run(() =>
             {
                 currentSection = Section.Menu;
-                BuildSectionButtons();
-                ShowInterface();
+                OpenSection();
                 while (!stopped)
                 {
                     ConsoleKeyInfo keyInfo = Console.ReadKey(true);
                     if (keyInfo.Key == ConsoleKey.UpArrow || keyInfo.Key == ConsoleKey.DownArrow)
                     {
+                        if (soundEffect) Console.Beep(5000, 80);
                         if (keyInfo.Key == ConsoleKey.UpArrow)
                         {
-                            operationNum = operationNum == 1 ? sectionButtons.Count : operationNum - 1;
+                            operationNum = operationNum <= 1 ? sectionButtons.Count : operationNum - 1;
                         }
                         else if (keyInfo.Key == ConsoleKey.DownArrow)
                         {
-                            operationNum = operationNum == sectionButtons.Count ? 1 : operationNum + 1;
+                            operationNum = operationNum >= sectionButtons.Count ? 1 : operationNum + 1;
                         }
                         ShowInterface();
+                    }
+                    else if (keyInfo.Key == ConsoleKey.Enter)
+                    {
+                        if (soundEffect) Console.Beep(700, 80);
+                        PressedButtonAction();
                     }
                 }
             });

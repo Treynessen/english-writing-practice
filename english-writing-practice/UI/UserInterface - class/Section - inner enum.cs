@@ -4,7 +4,12 @@
     {
         private enum Section
         {
-            Menu
+            Menu,
+            Training,
+            AddPhrase,
+            PhraseList,
+            LocalizationSettings,
+            SoundSettings
         }
     }
 }

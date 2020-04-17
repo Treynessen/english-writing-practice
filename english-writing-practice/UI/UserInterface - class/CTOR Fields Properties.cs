@@ -15,12 +15,18 @@ namespace Treynessen.UI
         private ConsoleColor selectedTextColor = ConsoleColor.White;
         private ConsoleColor selectedTextBackgroundColor = ConsoleColor.DarkMagenta;
 
+        private Section? parentSection;
         private Section currentSection;
         private LinkedList<string> sectionButtons;
 
         private Task controlTask;
         private bool stopped = true;
+
+        private bool verticalControlAvailable;
+        private bool horizontalControlAvailable;
         private int operationNum = 1;
+
+        private bool soundEffect = false;
 
         IConfiguration coreConfiguration;
         IConfiguration localization;
@@ -38,6 +44,7 @@ namespace Treynessen.UI
             OpenConfig("core_config.ini", ref coreConfiguration);
             OpenConfig($"{coreConfiguration["lang"].ToLower()}_localization", ref localization);
             programName = "Language writing practice";
+            soundEffect = coreConfiguration["sound_effect"] != null && coreConfiguration["sound_effect"].Equals("true") ? true : false;
             Console.CursorVisible = false;
             Console.ForegroundColor = defaultTextColor;
             Console.BackgroundColor = defaultTextBackgroundColor;
