@@ -18,8 +18,6 @@ namespace Treynessen.UI
                     string buttonName = buttonsSection[$"button_{rowId}_{columnId}"];
                     // Если не удалось получить следующую кнопку (больше кнопок в строке нет), тогда выходим из цикла
                     if (buttonName == null) break;
-                    // Если в строке имеется 2 и более кнопок, тогда разрешаем горизонтальное управление
-                    if (columnId == 2) horizontalControlAvailable = true;
                     if (node == null)
                     {
                         node = buttons.AddLast(new LinkedList<string>());
@@ -27,14 +25,6 @@ namespace Treynessen.UI
                     node.Value.AddLast(buttonName);
                 }
                 if (node == null) stop = true;
-            }
-            if (buttons.Count > 1)
-            {
-                verticalControlAvailable = true;
-            }
-            else
-            {
-                verticalControlAvailable = false;
             }
             this.buttons = new Buttons(buttons);
         }

@@ -22,8 +22,6 @@ namespace Treynessen.UI
         private Task controlTask;
         private bool stopped = true;
 
-        private bool verticalControlAvailable;
-        private bool horizontalControlAvailable;
         private int verticalOperationNum = 1;
         private int horizontalOperationNum = 1;
 

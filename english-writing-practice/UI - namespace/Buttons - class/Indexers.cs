@@ -9,7 +9,7 @@
             get
             {
                 (int rowId, int columnId) = GetButtonId(buttonNum);
-                return buttons[rowId][columnId];
+                return this[rowId, columnId];
             }
         }
     }

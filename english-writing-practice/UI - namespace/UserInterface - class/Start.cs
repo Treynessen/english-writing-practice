@@ -15,8 +15,8 @@ namespace Treynessen.UI
                 while (!stopped)
                 {
                     ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-                    if ((verticalControlAvailable && (keyInfo.Key == ConsoleKey.UpArrow || keyInfo.Key == ConsoleKey.DownArrow))
-                    || (horizontalControlAvailable && buttons.GetColumnCount(verticalOperationNum) > 1 && (keyInfo.Key == ConsoleKey.LeftArrow || keyInfo.Key == ConsoleKey.RightArrow)))
+                    if ((buttons.VerticalControlAvailable() && (keyInfo.Key == ConsoleKey.UpArrow || keyInfo.Key == ConsoleKey.DownArrow))
+                    || (buttons.HorizontalControlAvailable(verticalOperationNum) && (keyInfo.Key == ConsoleKey.LeftArrow || keyInfo.Key == ConsoleKey.RightArrow)))
                     {
                         if (soundEffect) Console.Beep(5000, 80);
                         if (keyInfo.Key == ConsoleKey.UpArrow)

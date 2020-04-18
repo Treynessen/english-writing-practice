@@ -10,5 +10,5 @@ button_6_1=Выйти
 [SoundSettings]
 SectionName=Настройка звука
 button_1_1=Включить звук
-button_1_2=Выключить звук
-button_1_3=Назад
+button_2_1=Выключить звук
+button_3_1=Назад

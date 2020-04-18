@@ -5,7 +5,6 @@
         private void OpenSection()
         {
             verticalOperationNum = horizontalOperationNum = 1;
-            verticalControlAvailable = horizontalControlAvailable = false;
             switch (currentSection)
             {
                 case Section.Menu:
