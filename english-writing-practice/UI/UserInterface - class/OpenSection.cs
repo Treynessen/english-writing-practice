@@ -1,18 +1,15 @@
-﻿using System;
-using System.Threading.Tasks;
-
-namespace Treynessen.UI
+﻿namespace Treynessen.UI
 {
     public partial class UserInterface
     {
         private void OpenSection()
         {
-            operationNum = 1;
+            verticalOperationNum = horizontalOperationNum = 1;
+            verticalControlAvailable = horizontalControlAvailable = false;
             switch (currentSection)
             {
                 case Section.Menu:
-                    BuildSectionButtons();
-                    ShowInterface();
+                    DefaultSectionHandler();
                     break;
                 case Section.Training:
                     break;
@@ -23,8 +20,7 @@ namespace Treynessen.UI
                 case Section.LocalizationSettings:
                     break;
                 case Section.SoundSettings:
-                    BuildSectionButtons();
-                    ShowInterface();
+                    DefaultSectionHandler();
                     break;
             }
         }

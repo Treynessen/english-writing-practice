@@ -8,27 +8,25 @@ namespace Treynessen.UI
         {
             Console.Clear();
             Console.Title = $"{programName} - {localization[currentSection.ToString() + ":SectionName"]}";
-            int count = 1;
-            foreach (var button in sectionButtons)
+            for (int rowId = 1; rowId <= buttons.GetRowCount(); ++rowId)
             {
-                if (count == operationNum)
+                for (int columnId = 1; columnId <= buttons.GetColumnCount(rowId); ++columnId)
                 {
-                    Console.ForegroundColor = selectedTextColor;
-                    Console.BackgroundColor = selectedTextBackgroundColor;
-                    Console.Write("> ");
+                    if (columnId > 1)
+                    {
+                        Console.Write("   ");
+                    }
+                    if (rowId == verticalOperationNum && columnId == horizontalOperationNum)
+                    {
+                        Console.ForegroundColor = selectedTextColor;
+                        Console.BackgroundColor = selectedTextBackgroundColor;
+                        Console.Write(buttons[rowId, columnId]);
+                        Console.ForegroundColor = defaultTextColor;
+                        Console.BackgroundColor = defaultTextBackgroundColor;
+                    }
+                    else Console.Write(buttons[rowId, columnId]);
                 }
-                else
-                {
-                    Console.ForegroundColor = defaultTextColor;
-                    Console.BackgroundColor = defaultTextBackgroundColor;
-                }
-                Console.WriteLine(button);
-                if (count == operationNum)
-                {
-                    Console.ForegroundColor = defaultTextColor;
-                    Console.BackgroundColor = defaultTextBackgroundColor;
-                }
-                ++count;
+                Console.WriteLine();
             }
         }
     }

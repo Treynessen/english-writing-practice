@@ -8,7 +8,6 @@ namespace Treynessen.UI
         public Task Start(bool innerWaiting = true)
         {
             stopped = false;
-            operationNum = 1;
             controlTask = Task.Run(() =>
             {
                 currentSection = Section.Menu;
@@ -16,16 +15,25 @@ namespace Treynessen.UI
                 while (!stopped)
                 {
                     ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-                    if (keyInfo.Key == ConsoleKey.UpArrow || keyInfo.Key == ConsoleKey.DownArrow)
+                    if ((verticalControlAvailable && (keyInfo.Key == ConsoleKey.UpArrow || keyInfo.Key == ConsoleKey.DownArrow))
+                    || (horizontalControlAvailable && buttons.GetColumnCount(verticalOperationNum) > 1 && (keyInfo.Key == ConsoleKey.LeftArrow || keyInfo.Key == ConsoleKey.RightArrow)))
                     {
                         if (soundEffect) Console.Beep(5000, 80);
                         if (keyInfo.Key == ConsoleKey.UpArrow)
                         {
-                            operationNum = operationNum <= 1 ? sectionButtons.Count : operationNum - 1;
+                            verticalOperationNum = buttons.GetPreviousRowId(verticalOperationNum);
                         }
                         else if (keyInfo.Key == ConsoleKey.DownArrow)
                         {
-                            operationNum = operationNum >= sectionButtons.Count ? 1 : operationNum + 1;
+                            verticalOperationNum = buttons.GetNextRowId(verticalOperationNum);
+                        }
+                        else if (keyInfo.Key == ConsoleKey.LeftArrow)
+                        {
+                            horizontalOperationNum = buttons.GetPreviousColumnId(verticalOperationNum, horizontalOperationNum);
+                        }
+                        else if (keyInfo.Key == ConsoleKey.RightArrow)
+                        {
+                            horizontalOperationNum = buttons.GetNextColumnId(verticalOperationNum, horizontalOperationNum);
                         }
                         ShowInterface();
                     }

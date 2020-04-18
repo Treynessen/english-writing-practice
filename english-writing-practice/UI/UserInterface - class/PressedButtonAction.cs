@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Treynessen.UI
+﻿namespace Treynessen.UI
 {
     public partial class UserInterface
     {
@@ -8,11 +6,11 @@ namespace Treynessen.UI
         {
             if (currentSection == Section.Menu)
             {
-                MenuButtonsHandler();
+                MenuSection_ButtonsHandler();
             }
             else if (currentSection == Section.SoundSettings)
             {
-                SoundSettingsButtonsHandler();
+                SoundSettingsSection_ButtonsHandler();
             }
         }
     }

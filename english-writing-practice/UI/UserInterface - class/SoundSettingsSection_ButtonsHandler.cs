@@ -5,9 +5,9 @@ namespace Treynessen.UI
 {
     public partial class UserInterface
     {
-        private void SoundSettingsButtonsHandler()
+        private void SoundSettingsSection_ButtonsHandler()
         {
-            switch (operationNum)
+            switch (buttons.GetButtonNum(verticalOperationNum, horizontalOperationNum))
             {
                 case 1:
                     soundEffect = true;
@@ -23,7 +23,7 @@ namespace Treynessen.UI
                     OpenSection();
                     break;
                 default:
-                    throw new InvalidOperationException($"Operation {operationNum} doesn't exist");
+                    throw new InvalidOperationException($"Operation {(verticalOperationNum, horizontalOperationNum)} doesn't exist");
             }
         }
 

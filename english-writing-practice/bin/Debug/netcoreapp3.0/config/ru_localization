@@ -1,14 +1,14 @@
 Name=Русский
 [Menu]
 SectionName=Меню
-button_1=Тренировка
-button_2=Добавить фразу
-button_3=Список фраз
-button_4=Настройка языка
-button_5=Настройка звука
-button_6=Выйти
+button_1_1=Тренировка
+button_2_1=Добавить фразу
+button_3_1=Список фраз
+button_4_1=Настройка языка
+button_5_1=Настройка звука
+button_6_1=Выйти
 [SoundSettings]
 SectionName=Настройка звука
-button_1=Включить звук
-button_2=Выключить звук
-button_3=Назад
+button_1_1=Включить звук
+button_1_2=Выключить звук
+button_1_3=Назад

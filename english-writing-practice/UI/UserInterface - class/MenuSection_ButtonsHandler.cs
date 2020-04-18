@@ -4,9 +4,9 @@ namespace Treynessen.UI
 {
     public partial class UserInterface
     {
-        private void MenuButtonsHandler()
+        private void MenuSection_ButtonsHandler()
         {
-            switch (operationNum)
+            switch (buttons.GetButtonNum(verticalOperationNum, horizontalOperationNum))
             {
                 case 1:
 
@@ -26,10 +26,10 @@ namespace Treynessen.UI
                     OpenSection();
                     break;
                 case 6:
-
+                    Stop();
                     break;
                 default:
-                    throw new InvalidOperationException($"Operation {operationNum} doesn't exist");
+                    throw new InvalidOperationException($"Operation {(verticalOperationNum, horizontalOperationNum)} doesn't exist");
             }
         }
     }

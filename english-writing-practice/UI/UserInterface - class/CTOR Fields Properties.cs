@@ -17,14 +17,15 @@ namespace Treynessen.UI
 
         private Section? parentSection;
         private Section currentSection;
-        private LinkedList<string> sectionButtons;
+        private Buttons buttons;
 
         private Task controlTask;
         private bool stopped = true;
 
         private bool verticalControlAvailable;
         private bool horizontalControlAvailable;
-        private int operationNum = 1;
+        private int verticalOperationNum = 1;
+        private int horizontalOperationNum = 1;
 
         private bool soundEffect = false;
 
