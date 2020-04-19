@@ -2,9 +2,9 @@
 {
     public partial class Buttons
     {
-        public string this[int rowId, int columnId] => buttons[rowId - 1][columnId - 1];
+        public Button this[int rowId, int columnId] => buttons[rowId - 1][columnId - 1];
 
-        public string this[int buttonNum]
+        public Button this[int buttonNum]
         {
             get
             {

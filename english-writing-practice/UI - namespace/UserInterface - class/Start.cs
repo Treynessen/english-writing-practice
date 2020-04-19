@@ -40,7 +40,7 @@ namespace Treynessen.UI
                     else if (keyInfo.Key == ConsoleKey.Enter)
                     {
                         if (soundEffect) Console.Beep(700, 80);
-                        PressedButtonAction();
+                        buttons[verticalOperationNum, horizontalOperationNum].Press();
                     }
                 }
             });

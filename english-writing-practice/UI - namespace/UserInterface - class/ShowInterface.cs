@@ -20,11 +20,11 @@ namespace Treynessen.UI
                     {
                         Console.ForegroundColor = selectedTextColor;
                         Console.BackgroundColor = selectedTextBackgroundColor;
-                        Console.Write(buttons[rowId, columnId]);
+                        Console.Write(buttons[rowId, columnId].Name);
                         Console.ForegroundColor = defaultTextColor;
                         Console.BackgroundColor = defaultTextBackgroundColor;
                     }
-                    else Console.Write(buttons[rowId, columnId]);
+                    else Console.Write(buttons[rowId, columnId].Name);
                 }
                 Console.WriteLine();
             }

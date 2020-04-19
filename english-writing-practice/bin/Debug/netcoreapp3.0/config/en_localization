@@ -1,0 +1,17 @@
+Name=English
+[Menu]
+SectionName=Menu
+button_1_1=Training
+button_2_1=Add phrase
+button_3_1=Phrase list
+button_4_1=Localization settings
+button_5_1=Sound settings
+button_6_1=Exit
+[LocalizationSettings]
+SectionName=Localization settings
+button_1_1=Back
+[SoundSettings]
+SectionName=Sound settings
+button_1_1=Sound on
+button_2_1=Sound off
+button_3_1=Back

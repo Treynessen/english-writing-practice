@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
+using Treynessen.Functions;
 
 namespace Treynessen.UI
 {
@@ -40,8 +40,14 @@ namespace Treynessen.UI
                 throw new DirectoryNotFoundException("Config folder directory doesn't exist");
             }
             this.configFolderPath = configFolder.FullName;
-            OpenConfig("core_config.ini", ref coreConfiguration);
-            OpenConfig($"{coreConfiguration["lang"].ToLower()}_localization", ref localization);
+            StaticFunctions.OpenConfig(
+                path: $"{this.configFolderPath}/core_config.ini", 
+                configuration: out coreConfiguration
+            );
+            StaticFunctions.OpenConfig(
+                path: $"{this.configFolderPath}/{coreConfiguration["lang"].ToLower()}_localization",
+                configuration: out localization
+            );
             programName = "Language writing practice";
             soundEffect = coreConfiguration["sound_effect"] != null && coreConfiguration["sound_effect"].Equals("true") ? true : false;
             Console.CursorVisible = false;

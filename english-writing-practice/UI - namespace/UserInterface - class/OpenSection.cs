@@ -8,7 +8,9 @@
             switch (currentSection)
             {
                 case Section.Menu:
-                    DefaultSectionHandler();
+                    BuildSectionButtons();
+                    Menu_SetButtonsHandler();
+                    ShowInterface();
                     break;
                 case Section.Training:
                     break;
@@ -17,9 +19,13 @@
                 case Section.PhraseList:
                     break;
                 case Section.LocalizationSettings:
+                    BuildLocalizationButtons();
+                    ShowInterface();
                     break;
                 case Section.SoundSettings:
-                    DefaultSectionHandler();
+                    BuildSectionButtons();
+                    SoundSettings_SetButtonsHandler();
+                    ShowInterface();
                     break;
             }
         }

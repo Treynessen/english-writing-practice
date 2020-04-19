@@ -7,6 +7,9 @@ button_3_1=Список фраз
 button_4_1=Настройка языка
 button_5_1=Настройка звука
 button_6_1=Выйти
+[LocalizationSettings]
+SectionName=Настройка языка
+button_1_1=Назад
 [SoundSettings]
 SectionName=Настройка звука
 button_1_1=Включить звук
