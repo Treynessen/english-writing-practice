@@ -5,9 +5,14 @@
         private void Menu_SetButtonsHandler()
         {
             buttons[1].OnPressed += () => { };
-            buttons[2].OnPressed += () => { };
+            buttons[2].OnPressed += () =>
+            {
+                parentSection = Section.Menu;
+                currentSection = Section.AddPhrase;
+                OpenSection();
+            };
             buttons[3].OnPressed += () => { };
-            buttons[4].OnPressed += () => 
+            buttons[4].OnPressed += () =>
             {
                 parentSection = Section.Menu;
                 currentSection = Section.LocalizationSettings;

@@ -40,7 +40,6 @@ namespace Treynessen.UI
                     );
                     // Изменяем название кнопки назад в зависимости от текущей локализации
                     this.buttons[this.buttons.Count].Rename(localization["LocalizationSettings:button_1_1"]);
-                    ShowInterface();
                 };
                 buttons.AddLast(new LinkedList<Button>()).Value.AddLast(button);
             }

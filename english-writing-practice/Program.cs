@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Treynessen.UI;
 using Treynessen.EnglishPractice;
@@ -24,15 +24,17 @@ class Program
 {
     static void Main()
     {
-        UserInterface userInterface = new UserInterface("config");
-        //ConsoleHelper.SetSignalHandler(signal =>
-        //{
-        //    if(signal == ConsoleSignal.CtrlBreak || signal == ConsoleSignal.Close 
-        //    || signal == ConsoleSignal.LogOff || signal == ConsoleSignal.Shutdown)
-        //    {
-        //        userInterface.Stop();
-        //    }
-        //}, true);
+        LinkedList<RuPhraseAndTranslation> ruPhrasesDb = new LinkedList<RuPhraseAndTranslation>();
+        LinkedList<EnPhraseAndTranslation> enPhrasesDb = new LinkedList<EnPhraseAndTranslation>();
+        UserInterface userInterface = new UserInterface("config", ruPhrasesDb, enPhrasesDb);
+        ConsoleHelper.SetSignalHandler(signal =>
+        {
+            if (signal == ConsoleSignal.CtrlBreak || signal == ConsoleSignal.Close
+            || signal == ConsoleSignal.LogOff || signal == ConsoleSignal.Shutdown)
+            {
+                userInterface.Stop();
+            }
+        }, true);
         userInterface.Start();
     }
 }

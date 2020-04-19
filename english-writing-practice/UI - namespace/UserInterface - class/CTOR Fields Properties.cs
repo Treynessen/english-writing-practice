@@ -1,13 +1,18 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using Treynessen.Functions;
+using Treynessen.EnglishPractice;
 
 namespace Treynessen.UI
 {
     public partial class UserInterface
     {
+        private LinkedList<RuPhraseAndTranslation> ruPhrasesDb;
+        private LinkedList<EnPhraseAndTranslation> enPhrasesDb;
+
         private string programName;
 
         private ConsoleColor defaultTextColor = ConsoleColor.DarkRed;
@@ -32,8 +37,10 @@ namespace Treynessen.UI
 
         private string configFolderPath;
 
-        public UserInterface(string configFolderPath)
+        public UserInterface(string configFolderPath, LinkedList<RuPhraseAndTranslation> ruPhrasesDb, LinkedList<EnPhraseAndTranslation> enPhrasesDb)
         {
+            this.ruPhrasesDb = ruPhrasesDb;
+            this.enPhrasesDb = enPhrasesDb;
             DirectoryInfo configFolder = new DirectoryInfo(configFolderPath);
             if (!configFolder.Exists)
             {
@@ -41,7 +48,7 @@ namespace Treynessen.UI
             }
             this.configFolderPath = configFolder.FullName;
             StaticFunctions.OpenConfig(
-                path: $"{this.configFolderPath}/core_config.ini", 
+                path: $"{this.configFolderPath}/core_config.ini",
                 configuration: out coreConfiguration
             );
             StaticFunctions.OpenConfig(
