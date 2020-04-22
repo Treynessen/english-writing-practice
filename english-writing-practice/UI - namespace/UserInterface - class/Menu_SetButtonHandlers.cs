@@ -2,27 +2,24 @@
 {
     public partial class UserInterface
     {
-        private void Menu_SetButtonsHandler()
+        private void Menu_SetButtonHandlers()
         {
             buttons[1].OnPressed += () => { };
             buttons[2].OnPressed += () =>
             {
                 parentSection = Section.Menu;
-                currentSection = Section.AddPhrase;
-                OpenSection();
+                currentSection = Section.AddingPhrase;
             };
             buttons[3].OnPressed += () => { };
             buttons[4].OnPressed += () =>
             {
                 parentSection = Section.Menu;
                 currentSection = Section.LocalizationSettings;
-                OpenSection();
             };
             buttons[5].OnPressed += () =>
             {
                 parentSection = Section.Menu;
                 currentSection = Section.SoundSettings;
-                OpenSection();
             };
             buttons[6].OnPressed += () =>
             {

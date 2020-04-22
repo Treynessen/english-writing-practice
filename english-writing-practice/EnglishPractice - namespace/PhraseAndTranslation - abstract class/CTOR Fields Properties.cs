@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace Treynessen.EnglishPractice
 {
+    [Serializable]
     public abstract partial class PhraseAndTranslation
     {
         private bool activeValue = true;

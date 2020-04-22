@@ -2,14 +2,12 @@
 
 namespace Treynessen.UI
 {
-    public partial class UserInterface
+    public partial class ButtonInterface
     {
         private void UpdateInterface()
         {
             Console.Clear();
-            Console.Title = $"{programName} - {localization[currentSection.ToString() + ":SectionName"]}";
-            string headerText = localization[currentSection.ToString() + ":header"];
-            string footerText = localization[currentSection.ToString() + ":footer"];
+            Console.Title = getName();
             if (!string.IsNullOrEmpty(headerText))
             {
                 Console.WriteLine(headerText);
@@ -24,11 +22,11 @@ namespace Treynessen.UI
                     }
                     if (rowId == verticalOperationNum && columnId == horizontalOperationNum)
                     {
-                        Console.ForegroundColor = selectedTextColor;
-                        Console.BackgroundColor = selectedTextBackgroundColor;
+                        Console.ForegroundColor = selectedButton_textColor;
+                        Console.BackgroundColor = selectedText_selectionColor;
                         Console.Write(buttons[rowId, columnId].Name);
-                        Console.ForegroundColor = defaultTextColor;
-                        Console.BackgroundColor = defaultTextBackgroundColor;
+                        Console.ForegroundColor = unselectedButton_textColor;
+                        Console.BackgroundColor = unselectedButton_selectionColor;
                     }
                     else Console.Write(buttons[rowId, columnId].Name);
                 }

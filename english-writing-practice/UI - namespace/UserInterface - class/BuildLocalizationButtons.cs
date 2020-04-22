@@ -48,7 +48,6 @@ namespace Treynessen.UI
             {
                 parentSection = null;
                 currentSection = Section.Menu;
-                OpenSection();
             };
             buttons.AddLast(new LinkedList<Button>()).Value.AddLast(backButton);
             this.buttons = new Buttons(buttons);

@@ -4,27 +4,53 @@
     {
         private void OpenSection()
         {
-            verticalOperationNum = horizontalOperationNum = 1;
             switch (currentSection)
             {
                 case Section.Menu:
                     BuildSectionButtons();
-                    Menu_SetButtonsHandler();
+                    Menu_SetButtonHandlers();
+                    currentInterface = new ButtonInterface(
+                        buttons: buttons,
+                        controlKeyContainer: controlKeyContainer,
+                        getName: () => $"{programName} - {localization["Menu:SectionName"]}",
+                        soundEffect: () => soundEffect
+                    );
+                    (currentInterface as ButtonInterface).StopAfterClickedEnterKey += () => true;
                     break;
                 case Section.Training:
                     break;
-                case Section.AddPhrase:
-                    BuildSectionButtons();
-                    AddPhrase_SetButtonsHandler();
+                case Section.AddingPhrase:
                     break;
                 case Section.PhraseList:
                     break;
                 case Section.LocalizationSettings:
                     BuildLocalizationButtons();
+                    currentInterface = new ButtonInterface(
+                        buttons: buttons,
+                        controlKeyContainer: controlKeyContainer,
+                        getName: () => $"{programName} - {localization["LocalizationSettings:SectionName"]}",
+                        soundEffect: () => soundEffect
+                    );
+                    (currentInterface as ButtonInterface).StopAfterClickedEnterKey += () =>
+                    {
+                        if (currentSection == Section.Menu) return true;
+                        else return false;
+                    };
                     break;
                 case Section.SoundSettings:
                     BuildSectionButtons();
                     SoundSettings_SetButtonsHandler();
+                    currentInterface = new ButtonInterface(
+                        buttons: buttons,
+                        controlKeyContainer: controlKeyContainer,
+                        getName: () => $"{programName} - {localization["SoundSettings:SectionName"]}",
+                        soundEffect: () => soundEffect
+                    );
+                    (currentInterface as ButtonInterface).StopAfterClickedEnterKey += () =>
+                    {
+                        if (currentSection == Section.Menu) return true;
+                        else return false;
+                    };
                     break;
             }
         }

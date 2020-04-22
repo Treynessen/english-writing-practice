@@ -15,21 +15,14 @@ namespace Treynessen.UI
 
         private string programName;
 
-        private ConsoleColor defaultTextColor = ConsoleColor.DarkRed;
-        private ConsoleColor defaultTextBackgroundColor = ConsoleColor.White;
-        private ConsoleColor selectedTextColor = ConsoleColor.White;
-        private ConsoleColor selectedTextBackgroundColor = ConsoleColor.DarkMagenta;
-
         private Section? parentSection;
         private Section currentSection;
         private Buttons buttons;
 
-        private Task controlTask;
-        private bool stopped = true;
+        private IUserInterface currentInterface;
+        private bool stopped = false;
 
-        private int verticalOperationNum = 1;
-        private int horizontalOperationNum = 1;
-
+        private ControlKeyContainer controlKeyContainer;
         private bool soundEffect = false;
 
         IConfiguration coreConfiguration;
@@ -57,9 +50,14 @@ namespace Treynessen.UI
             );
             programName = "Language writing practice";
             soundEffect = coreConfiguration["sound_effect"] != null && coreConfiguration["sound_effect"].Equals("true") ? true : false;
-            Console.CursorVisible = false;
-            Console.ForegroundColor = defaultTextColor;
-            Console.BackgroundColor = defaultTextBackgroundColor;
+            controlKeyContainer = new ControlKeyContainer
+            {
+                LeftKey = ConsoleKey.LeftArrow,
+                RightKey = ConsoleKey.RightArrow,
+                UpKey = ConsoleKey.UpArrow,
+                DownKey = ConsoleKey.DownArrow,
+                EnterKey = ConsoleKey.Enter
+            };
         }
     }
 }

@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Treynessen.EnglishPractice
 {
+    [Serializable]
     public partial class EnPhraseAndTranslation : PhraseAndTranslation
     {
         private LinkedList<EnPhraseAndTranslation> EnPhrasesDb => phraseDb as LinkedList<EnPhraseAndTranslation>;
@@ -31,6 +33,5 @@ namespace Treynessen.EnglishPractice
             AddTranslation(translations);
             enPhrasesDb.AddLast(this);
         }
-
     }
 }
