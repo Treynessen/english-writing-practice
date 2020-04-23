@@ -6,8 +6,8 @@ namespace Treynessen.UI
     {
         Func<string> getName;
         private ConsoleKey? leftKey, rightKey, upKey, downKey, enterKey;
-        private ConsoleColor unselectedButton_textColor = ConsoleColor.DarkRed;
-        private ConsoleColor unselectedButton_selectionColor = ConsoleColor.White;
+        private ConsoleColor unselectedButton_textColor = IUserInterface.DefaultTextColor;
+        private ConsoleColor unselectedButton_selectionColor = IUserInterface.DefaultBackgroundColor;
         private ConsoleColor selectedButton_textColor = ConsoleColor.White;
         private ConsoleColor selectedText_selectionColor = ConsoleColor.DarkMagenta;
         private Buttons buttons;

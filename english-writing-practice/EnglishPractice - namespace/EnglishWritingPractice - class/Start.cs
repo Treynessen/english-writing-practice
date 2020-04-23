@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 
-namespace Treynessen.UI
+namespace Treynessen.EnglishPractice
 {
-    public partial class UserInterface
+    public partial class EnglishWritingPractice
     {
         public Task Start(bool innerWaiting = true)
         {

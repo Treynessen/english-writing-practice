@@ -11,9 +11,9 @@ namespace Treynessen.UI
             get
             {
                 int count = 0;
-                for (int row = 0; row < buttons.Length; ++row)
+                for (int verticalLineId = 0; verticalLineId < buttons.Length; ++verticalLineId)
                 {
-                    count += buttons[row].Length;
+                    count += buttons[verticalLineId].Length;
                 }
                 return count;
             }
@@ -22,32 +22,32 @@ namespace Treynessen.UI
         public Buttons(LinkedList<LinkedList<string>> buttonList)
         {
             buttons = new Button[buttonList.Count][];
-            int rowId = 0;
+            int verticalLineId = 0;
             foreach (var horizontalButtons in buttonList)
             {
-                buttons[rowId] = new Button[horizontalButtons.Count];
-                int columnId = 0;
+                buttons[verticalLineId] = new Button[horizontalButtons.Count];
+                int horizontalButtonId = 0;
                 foreach (var buttonName in horizontalButtons)
                 {
-                    buttons[rowId][columnId++] = new Button(buttonName);
+                    buttons[verticalLineId][horizontalButtonId++] = new Button(buttonName);
                 }
-                ++rowId;
+                ++verticalLineId;
             }
         }
 
         public Buttons(LinkedList<LinkedList<Button>> buttonList)
         {
             buttons = new Button[buttonList.Count][];
-            int rowId = 0;
+            int verticalLineId = 0;
             foreach (var horizontalButtons in buttonList)
             {
-                buttons[rowId] = new Button[horizontalButtons.Count];
-                int columnId = 0;
+                buttons[verticalLineId] = new Button[horizontalButtons.Count];
+                int horizontalButtonId = 0;
                 foreach (var button in horizontalButtons)
                 {
-                    buttons[rowId][columnId++] = button;
+                    buttons[verticalLineId][horizontalButtonId++] = button;
                 }
-                ++rowId;
+                ++verticalLineId;
             }
         }
     }

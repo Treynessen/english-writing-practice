@@ -1,8 +1,8 @@
 ﻿using Treynessen.Functions;
 
-namespace Treynessen.UI
+namespace Treynessen.EnglishPractice
 {
-    public partial class UserInterface
+    public partial class EnglishWritingPractice
     {
         private void SoundSettings_SetButtonsHandler()
         {

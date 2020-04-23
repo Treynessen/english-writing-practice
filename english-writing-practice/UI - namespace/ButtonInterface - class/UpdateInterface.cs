@@ -12,9 +12,9 @@ namespace Treynessen.UI
             {
                 Console.WriteLine(headerText);
             }
-            for (int rowId = 1; rowId <= buttons.GetRowCount(); ++rowId)
+            for (int rowId = 1; rowId <= buttons.GetVerticalLineCount(); ++rowId)
             {
-                for (int columnId = 1; columnId <= buttons.GetColumnCount(rowId); ++columnId)
+                for (int columnId = 1; columnId <= buttons.GetHorizontalButtonCount(rowId); ++columnId)
                 {
                     if (columnId > 1)
                     {

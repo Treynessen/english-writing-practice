@@ -20,19 +20,19 @@ namespace Treynessen.UI
                         if (soundEffect()) Console.Beep(5000, 80);
                         if (upKey.HasValue && pressedKeyInfo.Key == upKey.Value)
                         {
-                            verticalOperationNum = buttons.GetPreviousRowId(verticalOperationNum);
+                            verticalOperationNum = buttons.GetPreviousVerticalLineId(verticalOperationNum);
                         }
                         else if (downKey.HasValue && pressedKeyInfo.Key == downKey.Value)
                         {
-                            verticalOperationNum = buttons.GetNextRowId(verticalOperationNum);
+                            verticalOperationNum = buttons.GetNextVerticalLineId(verticalOperationNum);
                         }
                         else if (leftKey.HasValue && pressedKeyInfo.Key == leftKey.Value)
                         {
-                            horizontalOperationNum = buttons.GetPreviousColumnId(verticalOperationNum, horizontalOperationNum);
+                            horizontalOperationNum = buttons.GetPreviousHorizontalButtonId(verticalOperationNum, horizontalOperationNum);
                         }
                         else if (rightKey.HasValue && pressedKeyInfo.Key == rightKey.Value)
                         {
-                            horizontalOperationNum = buttons.GetNextColumnId(verticalOperationNum, horizontalOperationNum);
+                            horizontalOperationNum = buttons.GetNextHorizontalButtonId(verticalOperationNum, horizontalOperationNum);
                         }
                         callUpdateMethod = true;
                     }

@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using Treynessen.UI;
 
-namespace Treynessen.UI
+namespace Treynessen.EnglishPractice
 {
-    public partial class UserInterface
+    public partial class EnglishWritingPractice
     {
         // Получение кнопок для текущего раздела из файла с локализацией
         private void BuildSectionButtons()

@@ -1,14 +1,13 @@
 ﻿using System;
 using System.IO;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
+using Treynessen.UI;
 using Treynessen.Functions;
-using Treynessen.EnglishPractice;
 
-namespace Treynessen.UI
+namespace Treynessen.EnglishPractice
 {
-    public partial class UserInterface
+    public partial class EnglishWritingPractice
     {
         private LinkedList<RuPhraseAndTranslation> ruPhrasesDb;
         private LinkedList<EnPhraseAndTranslation> enPhrasesDb;
@@ -30,7 +29,7 @@ namespace Treynessen.UI
 
         private string configFolderPath;
 
-        public UserInterface(string configFolderPath, LinkedList<RuPhraseAndTranslation> ruPhrasesDb, LinkedList<EnPhraseAndTranslation> enPhrasesDb)
+        public EnglishWritingPractice(string configFolderPath, LinkedList<RuPhraseAndTranslation> ruPhrasesDb, LinkedList<EnPhraseAndTranslation> enPhrasesDb)
         {
             this.ruPhrasesDb = ruPhrasesDb;
             this.enPhrasesDb = enPhrasesDb;

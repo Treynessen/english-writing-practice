@@ -2,7 +2,7 @@
 {
     public partial class Buttons
     {
-        public int GetRowCount()
+        public int GetVerticalLineCount()
         {
             return buttons.Length;
         }

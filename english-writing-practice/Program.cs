@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using Treynessen.UI;
 using Treynessen.EnglishPractice;
 
 delegate void SignalHandler(ConsoleSignal consoleSignal);
@@ -26,15 +25,15 @@ class Program
     {
         LinkedList<RuPhraseAndTranslation> ruPhrasesDb = new LinkedList<RuPhraseAndTranslation>();
         LinkedList<EnPhraseAndTranslation> enPhrasesDb = new LinkedList<EnPhraseAndTranslation>();
-        UserInterface userInterface = new UserInterface("config", ruPhrasesDb, enPhrasesDb);
+        EnglishWritingPractice englishWritingPractice = new EnglishWritingPractice("config", ruPhrasesDb, enPhrasesDb);
         ConsoleHelper.SetSignalHandler(signal =>
         {
             if (signal == ConsoleSignal.CtrlBreak || signal == ConsoleSignal.Close
             || signal == ConsoleSignal.LogOff || signal == ConsoleSignal.Shutdown)
             {
-                userInterface.Stop();
+                englishWritingPractice.Stop();
             }
         }, true);
-        userInterface.Start();
+        englishWritingPractice.Start();
     }
 }

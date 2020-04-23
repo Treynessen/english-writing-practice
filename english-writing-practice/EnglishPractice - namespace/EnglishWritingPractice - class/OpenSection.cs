@@ -1,6 +1,8 @@
-﻿namespace Treynessen.UI
+﻿using Treynessen.UI;
+
+namespace Treynessen.EnglishPractice
 {
-    public partial class UserInterface
+    public partial class EnglishWritingPractice
     {
         private void OpenSection()
         {
@@ -20,6 +22,7 @@
                 case Section.Training:
                     break;
                 case Section.AddingPhrase:
+
                     break;
                 case Section.PhraseList:
                     break;

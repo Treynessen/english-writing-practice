@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.Configuration;
+using Treynessen.UI;
 using Treynessen.Functions;
 
-namespace Treynessen.UI
+namespace Treynessen.EnglishPractice
 {
-    public partial class UserInterface
+    public partial class EnglishWritingPractice
     {
         private void BuildLocalizationButtons()
         {

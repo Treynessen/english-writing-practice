@@ -1,10 +1,9 @@
 ﻿using System;
 using Treynessen.Functions;
-using Treynessen.EnglishPractice;
 
-namespace Treynessen.UI
+namespace Treynessen.EnglishPractice
 {
-    public partial class UserInterface
+    public partial class EnglishWritingPractice
     {
         private void AddingPhrase_SetButtonsHandler()
         {

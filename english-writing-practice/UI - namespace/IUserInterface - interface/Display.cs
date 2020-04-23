@@ -2,7 +2,7 @@
 
 namespace Treynessen.UI
 {
-    public interface IUserInterface
+    public partial interface IUserInterface
     {
         Task Display();
     }
