@@ -23,9 +23,12 @@ class Program
 {
     static void Main()
     {
-        LinkedList<RuPhraseAndTranslation> ruPhrasesDb = new LinkedList<RuPhraseAndTranslation>();
-        LinkedList<EnPhraseAndTranslation> enPhrasesDb = new LinkedList<EnPhraseAndTranslation>();
-        EnglishWritingPractice englishWritingPractice = new EnglishWritingPractice("config", ruPhrasesDb, enPhrasesDb);
+        PhraseAndTranslationContainer container = new PhraseAndTranslationContainer
+        {
+            RuPhrasesDb = new LinkedList<RuPhraseAndTranslation>(),
+            EnPhrasesDb = new LinkedList<EnPhraseAndTranslation>()
+        };
+        EnglishWritingPractice englishWritingPractice = new EnglishWritingPractice(container);
         ConsoleHelper.SetSignalHandler(signal =>
         {
             if (signal == ConsoleSignal.CtrlBreak || signal == ConsoleSignal.Close

@@ -11,12 +11,12 @@ namespace Treynessen.EnglishPractice
             var buttons = new LinkedList<LinkedList<string>>();
             var buttonsSection = localization.GetSection(currentSection.ToString());
             bool stop = false;
-            for (int rowId = 1; !stop; ++rowId)
+            for (int verticalLineId = 1; !stop; ++verticalLineId)
             {
                 LinkedListNode<LinkedList<string>> node = null;
-                for (int columnId = 1; ; ++columnId)
+                for (int horizontalButtonId = 1; ; ++horizontalButtonId)
                 {
-                    string buttonName = buttonsSection[$"button_{rowId}_{columnId}"];
+                    string buttonName = buttonsSection[$"button_{verticalLineId}_{horizontalButtonId}"];
                     // Если не удалось получить следующую кнопку (больше кнопок в строке нет), тогда выходим из цикла
                     if (buttonName == null) break;
                     if (node == null)

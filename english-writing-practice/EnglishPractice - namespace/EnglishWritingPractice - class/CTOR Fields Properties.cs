@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using Treynessen.UI;
 using Treynessen.Functions;
@@ -9,8 +8,7 @@ namespace Treynessen.EnglishPractice
 {
     public partial class EnglishWritingPractice
     {
-        private LinkedList<RuPhraseAndTranslation> ruPhrasesDb;
-        private LinkedList<EnPhraseAndTranslation> enPhrasesDb;
+        private PhraseAndTranslationContainer dataContainer;
 
         private string programName;
 
@@ -27,24 +25,15 @@ namespace Treynessen.EnglishPractice
         IConfiguration coreConfiguration;
         IConfiguration localization;
 
-        private string configFolderPath;
-
-        public EnglishWritingPractice(string configFolderPath, LinkedList<RuPhraseAndTranslation> ruPhrasesDb, LinkedList<EnPhraseAndTranslation> enPhrasesDb)
+        public EnglishWritingPractice(PhraseAndTranslationContainer dataContainer)
         {
-            this.ruPhrasesDb = ruPhrasesDb;
-            this.enPhrasesDb = enPhrasesDb;
-            DirectoryInfo configFolder = new DirectoryInfo(configFolderPath);
-            if (!configFolder.Exists)
-            {
-                throw new DirectoryNotFoundException("Config folder directory doesn't exist");
-            }
-            this.configFolderPath = configFolder.FullName;
+            this.dataContainer = dataContainer;
             StaticFunctions.OpenConfig(
-                path: $"{this.configFolderPath}/core_config.ini",
+                path: "config.ini",
                 configuration: out coreConfiguration
             );
             StaticFunctions.OpenConfig(
-                path: $"{this.configFolderPath}/{coreConfiguration["lang"].ToLower()}_localization",
+                path: $"localizations/{coreConfiguration["lang"].ToLower()}_localization",
                 configuration: out localization
             );
             programName = "Language writing practice";

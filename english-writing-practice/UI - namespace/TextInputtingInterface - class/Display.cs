@@ -12,7 +12,7 @@ namespace Treynessen.UI
             bool withoutEvent = false;
             for (int i = 0; i < variableInfoPairs.Length; ++i)
             {
-                Console.WriteLine($"{variableInfoPairs[i].Info}:");
+                Console.WriteLine($"{variableInfoPairs[i].Info}");
                 variableInfoPairs[i].Variable = Console.ReadLine();
                 if (string.IsNullOrEmpty(variableInfoPairs[i].Variable))
                 {
@@ -23,18 +23,24 @@ namespace Treynessen.UI
                     }
                     else
                     {
-                        for (int j = 0; j < i; ++j)
+                        Console.Clear();
+                        int j = 0;
+                        for (; j < i - 1; ++j)
                         {
-                            Console.WriteLine($"{variableInfoPairs[j].Info}:");
+                            Console.WriteLine($"{variableInfoPairs[j].Info}");
                             Console.WriteLine(variableInfoPairs[j].Variable);
                         }
+                        i = i - 2;
                     }
                 }
             }
             if (!withoutEvent)
             {
-                OnGettingData(variableInfoPairs.Select(vi => vi.Variable));
+                OnGettingData?.Invoke(variableInfoPairs.Select(vi => vi.Variable));
+                Console.WriteLine(successfulInputtingMsg);
+                Console.ReadKey();
             }
+            Console.CursorVisible = false;
             return Task.CompletedTask;
         }
     }

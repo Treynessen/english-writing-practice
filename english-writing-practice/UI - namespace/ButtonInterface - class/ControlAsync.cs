@@ -44,6 +44,10 @@ namespace Treynessen.UI
                         {
                             stopped = StopAfterClickedEnterKey();
                         }
+                        else
+                        {
+                            stopped = true;
+                        }
                         if (!stopped)
                         {
                             callUpdateMethod = true;

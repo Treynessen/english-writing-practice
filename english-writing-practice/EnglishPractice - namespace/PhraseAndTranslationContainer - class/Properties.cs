@@ -6,7 +6,7 @@ namespace Treynessen.EnglishPractice
     [Serializable]
     public class PhraseAndTranslationContainer
     {
-        public LinkedList<RuPhraseAndTranslation> ruPhrasesDb { get; set; }
-        public LinkedList<EnPhraseAndTranslation> enPhrasesDb { get; set; }
+        public LinkedList<RuPhraseAndTranslation> RuPhrasesDb { get; set; }
+        public LinkedList<EnPhraseAndTranslation> EnPhrasesDb { get; set; }
     }
 }

@@ -9,9 +9,25 @@ namespace Treynessen.EnglishPractice
 {
     public partial class EnglishWritingPractice
     {
+        private void OpenLocalizationSettingsSection()
+        {
+            BuildLocalizationButtons();
+            currentInterface = new ButtonInterface(
+                buttons: buttons,
+                controlKeyContainer: controlKeyContainer,
+                getName: () => $"{programName} - {localization["LocalizationSettings:SectionName"]}",
+                soundEffect: () => soundEffect
+            );
+            (currentInterface as ButtonInterface).StopAfterClickedEnterKey += () =>
+            {
+                if (currentSection == Section.Menu) return true;
+                else return false;
+            };
+        }
+
         private void BuildLocalizationButtons()
         {
-            var localizationPaths = Directory.GetFiles(configFolderPath, "*_localization");
+            var localizationPaths = Directory.GetFiles("localizations", "*_localization");
             LinkedList<LinkedList<Button>> buttons = new LinkedList<LinkedList<Button>>();
             foreach (var localizationPath in localizationPaths)
             {
@@ -31,12 +47,12 @@ namespace Treynessen.EnglishPractice
                     // Изменяем значение ключа lang в core_config
                     Regex regex = new Regex(@"(?<Type1>\w+)_localization$");
                     StaticFunctions.EditSettingInConfig(
-                        path: $"{configFolderPath}/core_config.ini",
+                        path: "config.ini",
                         settingKey: "lang",
                         newValue: regex.Match(localizationPath).Groups[1].Value
                     );
                     StaticFunctions.OpenConfig(
-                        path: $"{configFolderPath}/core_config.ini",
+                        path: "config.ini",
                         configuration: out coreConfiguration
                     );
                     // Изменяем название кнопки назад в зависимости от текущей локализации

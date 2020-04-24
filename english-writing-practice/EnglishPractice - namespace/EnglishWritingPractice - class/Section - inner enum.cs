@@ -6,7 +6,7 @@
         {
             Menu,
             Training,
-            AddingPhrase,
+            AddPhrase,
             PhraseList,
             LocalizationSettings,
             SoundSettings

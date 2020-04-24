@@ -4,56 +4,28 @@ namespace Treynessen.EnglishPractice
 {
     public partial class EnglishWritingPractice
     {
+        // Тут собирается интерфейс для секции
+        // Чтобы отобразить интерфейс необходимо вызвать метод currentInterface.Display()
+        // Вызов этого метода происходит внутри задачи, которая создается в методе Start
         private void OpenSection()
         {
             switch (currentSection)
             {
                 case Section.Menu:
-                    BuildSectionButtons();
-                    Menu_SetButtonHandlers();
-                    currentInterface = new ButtonInterface(
-                        buttons: buttons,
-                        controlKeyContainer: controlKeyContainer,
-                        getName: () => $"{programName} - {localization["Menu:SectionName"]}",
-                        soundEffect: () => soundEffect
-                    );
-                    (currentInterface as ButtonInterface).StopAfterClickedEnterKey += () => true;
+                    OpenMenuSection();
                     break;
                 case Section.Training:
                     break;
-                case Section.AddingPhrase:
-
+                case Section.AddPhrase:
+                    OpenAddPhraseSection();
                     break;
                 case Section.PhraseList:
                     break;
                 case Section.LocalizationSettings:
-                    BuildLocalizationButtons();
-                    currentInterface = new ButtonInterface(
-                        buttons: buttons,
-                        controlKeyContainer: controlKeyContainer,
-                        getName: () => $"{programName} - {localization["LocalizationSettings:SectionName"]}",
-                        soundEffect: () => soundEffect
-                    );
-                    (currentInterface as ButtonInterface).StopAfterClickedEnterKey += () =>
-                    {
-                        if (currentSection == Section.Menu) return true;
-                        else return false;
-                    };
+                    OpenLocalizationSettingsSection();
                     break;
                 case Section.SoundSettings:
-                    BuildSectionButtons();
-                    SoundSettings_SetButtonsHandler();
-                    currentInterface = new ButtonInterface(
-                        buttons: buttons,
-                        controlKeyContainer: controlKeyContainer,
-                        getName: () => $"{programName} - {localization["SoundSettings:SectionName"]}",
-                        soundEffect: () => soundEffect
-                    );
-                    (currentInterface as ButtonInterface).StopAfterClickedEnterKey += () =>
-                    {
-                        if (currentSection == Section.Menu) return true;
-                        else return false;
-                    };
+                    OpenSoundSettingsSection();
                     break;
             }
         }
