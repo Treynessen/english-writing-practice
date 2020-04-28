@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
+using System.Collections.Generic;
 
 namespace Treynessen.UI
 {
@@ -35,9 +36,9 @@ namespace Treynessen.UI
             }
         }
 
-        public Buttons(LinkedList<LinkedList<Button>> buttonList)
+        public Buttons(IEnumerable<LinkedList<Button>> buttonList)
         {
-            buttons = new Button[buttonList.Count][];
+            buttons = new Button[buttonList.Count()][];
             int verticalLineId = 0;
             foreach (var horizontalButtons in buttonList)
             {
@@ -49,6 +50,10 @@ namespace Treynessen.UI
                 }
                 ++verticalLineId;
             }
+        }
+
+        public Buttons(LinkedList<LinkedList<Button>> buttonList) : this(buttonList as IEnumerable<LinkedList<Button>>)
+        {
         }
     }
 }

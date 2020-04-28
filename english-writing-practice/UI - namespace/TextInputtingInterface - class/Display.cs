@@ -9,38 +9,43 @@ namespace Treynessen.UI
         public Task Display()
         {
             Console.Clear();
-            bool withoutEvent = false;
-            for (int i = 0; i < variableInfoPairs.Length; ++i)
+            bool exitInterface = false;
+            while (!exitInterface)
             {
-                Console.WriteLine($"{variableInfoPairs[i].Info}");
-                variableInfoPairs[i].Variable = Console.ReadLine();
-                if (string.IsNullOrEmpty(variableInfoPairs[i].Variable))
+                for (int i = 0; i < variableInfoPairs.Length; ++i)
                 {
-                    if (i == 0)
+                    Console.WriteLine($"{variableInfoPairs[i].Info}");
+                    variableInfoPairs[i].Variable = Console.ReadLine();
+                    if (string.IsNullOrEmpty(variableInfoPairs[i].Variable))
                     {
-                        withoutEvent = true;
-                        break;
-                    }
-                    else
-                    {
-                        Console.Clear();
-                        int j = 0;
-                        for (; j < i - 1; ++j)
+                        if (i == 0)
                         {
-                            Console.WriteLine($"{variableInfoPairs[j].Info}");
-                            Console.WriteLine(variableInfoPairs[j].Variable);
+                            exitInterface = true;
+                            break;
                         }
-                        i = i - 2;
+                        else
+                        {
+                            Console.Clear();
+                            int j = 0;
+                            for (; j < i - 1; ++j)
+                            {
+                                Console.WriteLine($"{variableInfoPairs[j].Info}");
+                                Console.WriteLine(variableInfoPairs[j].Variable);
+                            }
+                            i = i - 2;
+                        }
                     }
                 }
-            }
-            if (!withoutEvent)
-            {
-                OnGettingData?.Invoke(variableInfoPairs.Select(vi => vi.Variable));
-                Console.WriteLine(successfulInputtingMsg);
-                Console.ReadKey();
+                if (!exitInterface)
+                {
+                    OnGettingData?.Invoke(variableInfoPairs.Select(vi => vi.Variable));
+                    Console.WriteLine(successfulInputtingMsg);
+                    Console.ReadKey();
+                    Console.Clear();
+                }
             }
             Console.CursorVisible = false;
+            OnEnding?.Invoke();
             return Task.CompletedTask;
         }
     }

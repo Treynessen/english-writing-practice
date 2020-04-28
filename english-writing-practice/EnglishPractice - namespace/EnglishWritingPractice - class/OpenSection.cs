@@ -16,10 +16,23 @@ namespace Treynessen.EnglishPractice
                     break;
                 case Section.Training:
                     break;
-                case Section.AddPhrase:
-                    OpenAddPhraseSection();
+                case Section.AddPhrase_LanguageChoice:
+                    OpenAddPhrase_LanguageChoiceSection();
                     break;
-                case Section.PhraseList:
+                case Section.AddRuPhrase:
+                    OpenAddPhraseSection<RuPhraseAndTranslation>();
+                    break;
+                case Section.AddEnPhrase:
+                    OpenAddPhraseSection<EnPhraseAndTranslation>();
+                    break;
+                case Section.PhraseList_LanguageChoice:
+                    OpenPhraseList_LanguageChoiceSection();
+                    break;
+                case Section.RuPhraseList:
+                    OpenPhraseListSection<RuPhraseAndTranslation>();
+                    break;
+                case Section.EnPhraseList:
+                    OpenPhraseListSection<EnPhraseAndTranslation>();
                     break;
                 case Section.LocalizationSettings:
                     OpenLocalizationSettingsSection();

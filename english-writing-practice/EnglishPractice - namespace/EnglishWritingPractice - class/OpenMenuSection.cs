@@ -6,32 +6,17 @@ namespace Treynessen.EnglishPractice
     {
         private void OpenMenuSection()
         {
-            BuildSectionButtons();
+            Buttons buttons = BuildSectionButtons();
             buttons[1].OnPressed += () => { };
-            buttons[2].OnPressed += () =>
-            {
-                parentSection = Section.Menu;
-                currentSection = Section.AddPhrase;
-            };
-            buttons[3].OnPressed += () => { };
-            buttons[4].OnPressed += () =>
-            {
-                parentSection = Section.Menu;
-                currentSection = Section.LocalizationSettings;
-            };
-            buttons[5].OnPressed += () =>
-            {
-                parentSection = Section.Menu;
-                currentSection = Section.SoundSettings;
-            };
-            buttons[6].OnPressed += () =>
-            {
-                Stop();
-            };
+            buttons[2].OnPressed += () => currentSection = Section.AddPhrase_LanguageChoice;
+            buttons[3].OnPressed += () => currentSection = Section.PhraseList_LanguageChoice;
+            buttons[4].OnPressed += () => currentSection = Section.LocalizationSettings;
+            buttons[5].OnPressed += () => currentSection = Section.SoundSettings;
+            buttons[6].OnPressed += () => Stop();
             currentInterface = new ButtonInterface(
                 buttons: buttons,
                 controlKeyContainer: controlKeyContainer,
-                getName: () => $"{programName} - {localization["Menu:SectionName"]}",
+                getTitle: () => $"{programName} - {localization["Menu:SectionName"]}",
                 soundEffect: () => soundEffect
             );
             (currentInterface as ButtonInterface).StopAfterClickedEnterKey += () => true;

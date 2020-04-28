@@ -7,7 +7,7 @@ namespace Treynessen.UI
         private void UpdateInterface()
         {
             Console.Clear();
-            Console.Title = getName();
+            Console.Title = getTitle();
             if (!string.IsNullOrEmpty(headerText))
             {
                 Console.WriteLine(headerText);

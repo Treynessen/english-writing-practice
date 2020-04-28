@@ -12,19 +12,27 @@ namespace Treynessen.UI
             {
                 while (!stopped)
                 {
-                    bool callUpdateMethod = false;
+                    bool callUpdateInterface = false;
                     ConsoleKeyInfo pressedKeyInfo = Console.ReadKey(true);
                     if ((buttons.VerticalControlAvailable() && VerticalKeyPressed(pressedKeyInfo))
                     || (buttons.HorizontalControlAvailable(verticalOperationNum) && HorizontalKeyPressed(pressedKeyInfo)))
                     {
-                        if (soundEffect()) Console.Beep(5000, 80);
+                        if (soundEffect()) Console.Beep(2000, 80);
                         if (upKey.HasValue && pressedKeyInfo.Key == upKey.Value)
                         {
                             verticalOperationNum = buttons.GetPreviousVerticalLineId(verticalOperationNum);
+                            if (horizontalOperationNum > buttons.GetHorizontalButtonCount(verticalOperationNum))
+                            {
+                                horizontalOperationNum = buttons.GetHorizontalButtonCount(verticalOperationNum);
+                            }
                         }
                         else if (downKey.HasValue && pressedKeyInfo.Key == downKey.Value)
                         {
                             verticalOperationNum = buttons.GetNextVerticalLineId(verticalOperationNum);
+                            if (horizontalOperationNum > buttons.GetHorizontalButtonCount(verticalOperationNum))
+                            {
+                                horizontalOperationNum = buttons.GetHorizontalButtonCount(verticalOperationNum);
+                            }
                         }
                         else if (leftKey.HasValue && pressedKeyInfo.Key == leftKey.Value)
                         {
@@ -34,26 +42,16 @@ namespace Treynessen.UI
                         {
                             horizontalOperationNum = buttons.GetNextHorizontalButtonId(verticalOperationNum, horizontalOperationNum);
                         }
-                        callUpdateMethod = true;
+                        callUpdateInterface = true;
                     }
                     else if (enterKey.HasValue && pressedKeyInfo.Key == enterKey.Value)
                     {
                         if (soundEffect()) Console.Beep(700, 80);
                         buttons[verticalOperationNum, horizontalOperationNum].Press();
-                        if (StopAfterClickedEnterKey != null)
-                        {
-                            stopped = StopAfterClickedEnterKey();
-                        }
-                        else
-                        {
-                            stopped = true;
-                        }
-                        if (!stopped)
-                        {
-                            callUpdateMethod = true;
-                        }
+                        stopped = StopAfterClickedEnterKey == null ? true : StopAfterClickedEnterKey();
+                        callUpdateInterface = stopped ? false : true;
                     }
-                    if (callUpdateMethod) UpdateInterface();
+                    if (callUpdateInterface) UpdateInterface();
                 }
             });
         }

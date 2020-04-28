@@ -7,7 +7,7 @@ namespace Treynessen.EnglishPractice
     {
         private void OpenSoundSettingsSection()
         {
-            BuildSectionButtons();
+            Buttons buttons = BuildSectionButtons();
             buttons[1].OnPressed += () =>
             {
                 soundEffect = true;
@@ -28,16 +28,11 @@ namespace Treynessen.EnglishPractice
                 );
                 StaticFunctions.OpenConfig("config.ini", out coreConfiguration);
             };
-            buttons[3].OnPressed += () =>
-            {
-                parentSection = null;
-                currentSection = Section.Menu;
-                OpenSection();
-            };
+            buttons[3].OnPressed += () => currentSection = Section.Menu;
             currentInterface = new ButtonInterface(
                 buttons: buttons,
                 controlKeyContainer: controlKeyContainer,
-                getName: () => $"{programName} - {localization["SoundSettings:SectionName"]}",
+                getTitle: () => $"{programName} - {localization["SoundSettings:SectionName"]}",
                 soundEffect: () => soundEffect
             );
             (currentInterface as ButtonInterface).StopAfterClickedEnterKey += () =>

@@ -9,11 +9,13 @@ namespace Treynessen.UI
         private string successfulInputtingMsg;
 
         public event Action<IEnumerable<string>> OnGettingData;
+        public event Action OnEnding;
 
-        public TextInputtingInterface(VariableInfoPair[] variableInfoPairs, string successfulInputtingMsg)
+        public TextInputtingInterface(VariableInfoPair[] variableInfoPairs, string successfulInputtingMsg, Func<string> getTitle)
         {
             this.variableInfoPairs = variableInfoPairs;
             this.successfulInputtingMsg = successfulInputtingMsg;
+            Console.Title = getTitle();
             Console.CursorVisible = true;
             Console.ForegroundColor = IUserInterface.DefaultTextColor;
             Console.BackgroundColor = IUserInterface.DefaultBackgroundColor;

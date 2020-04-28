@@ -6,7 +6,7 @@ namespace Treynessen.EnglishPractice
     public partial class EnglishWritingPractice
     {
         // Получение кнопок для текущего раздела из файла с локализацией
-        private void BuildSectionButtons()
+        private Buttons BuildSectionButtons()
         {
             var buttons = new LinkedList<LinkedList<string>>();
             var buttonsSection = localization.GetSection(currentSection.ToString());
@@ -27,7 +27,7 @@ namespace Treynessen.EnglishPractice
                 }
                 if (node == null) stop = true;
             }
-            this.buttons = new Buttons(buttons);
+            return new Buttons(buttons);
         }
     }
 }

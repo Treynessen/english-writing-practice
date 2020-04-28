@@ -8,18 +8,36 @@ button_4_1=Настройка языка
 button_5_1=Настройка звука
 button_6_1=Выйти
 
-[AddPhrase]
-SectionName=Добавление фразы
+[AddPhrase_LanguageChoice]
+SectionName=Добавление фразы - Выбор языка
 header=Выберите язык добавляемой фразы:
 button_1_1=Русский
 button_2_1=Английский
 button_3_1=Назад
+
+[AddPhrase]
+SectionName=Добавление фразы
 phrase_in_russian=Фраза на русском
 phrase_in_english=Фраза на английском
 info_1=введите пустое значение, чтобы вернуться назад
 info_2=введите пустое значение, чтобы вернуться к вводу фразы
 phrase_added=Фраза добавлена
 press_any_key=Нажмите на любую кнопку для продолжения
+
+[PhraseList_LanguageChoice]
+SectionName=Список фраз - Выбор языка
+header=Выберите язык отображаемых фраз:
+button_1_1=Русский
+button_2_1=Английский
+button_3_1=Назад
+
+[PhraseList]
+SectionName=Список фраз
+letter_grid_horizontal_count=7
+show_all_button=Отобразить все фразы
+back_button=Назад
+edit_button=Изменить
+delete_button=Удалить
 
 [LocalizationSettings]
 SectionName=Настройка языка

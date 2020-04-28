@@ -6,32 +6,7 @@ namespace Treynessen.EnglishPractice
 {
     public partial class EnglishWritingPractice
     {
-        private void OpenAddPhraseSection()
-        {
-            BuildSectionButtons();
-            buttons[1].OnPressed += AddingPhrase<RuPhraseAndTranslation>;
-            buttons[2].OnPressed += AddingPhrase<EnPhraseAndTranslation>;
-            buttons[3].OnPressed += () =>
-            {
-                parentSection = null;
-                currentSection = Section.Menu;
-                OpenSection();
-            };
-            currentInterface = new ButtonInterface(
-                buttons: buttons,
-                controlKeyContainer: controlKeyContainer,
-                getName: () => $"{programName} - {localization["AddPhrase:SectionName"]}",
-                soundEffect: () => soundEffect,
-                headerText: localization["AddPhrase:header"]
-            );
-            (currentInterface as ButtonInterface).StopAfterClickedEnterKey += () =>
-            {
-                if (currentSection != Section.AddPhrase) return true;
-                else return false;
-            };
-        }
-
-        private void AddingPhrase<T>() where T : PhraseAndTranslation
+        private void OpenAddPhraseSection<T>() where T : PhraseAndTranslation
         {
             string phrase = null;
             string translation = null;
@@ -52,7 +27,7 @@ namespace Treynessen.EnglishPractice
                 new TextInputtingInterface.VariableInfoPair { Variable = phrase, Info = textForPhrase},
                 new TextInputtingInterface.VariableInfoPair { Variable = translation, Info = textForTranslation}
             };
-            currentInterface = new TextInputtingInterface(pairs, successAdded);
+            currentInterface = new TextInputtingInterface(pairs, successAdded, () => $"{programName} - {localization["AddPhrase:SectionName"]}");
             (currentInterface as TextInputtingInterface).OnGettingData += (data) =>
             {
                 phrase = data.ElementAt(0);
@@ -65,13 +40,12 @@ namespace Treynessen.EnglishPractice
                 {
                     EnPhraseAndTranslation.Create(phrase, translation, dataContainer.EnPhrasesDb, dataContainer.RuPhrasesDb);
                 }
-
                 StaticFunctions.Serialize(
                     path: "dictionary.data",
                     obj: dataContainer
                 );
             };
-            currentInterface.Display();
+            (currentInterface as TextInputtingInterface).OnEnding += () => currentSection = Section.AddPhrase_LanguageChoice;
         }
     }
 }

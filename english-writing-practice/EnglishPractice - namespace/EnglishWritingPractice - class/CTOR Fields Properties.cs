@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using Microsoft.Extensions.Configuration;
 using Treynessen.UI;
 using Treynessen.Functions;
@@ -12,9 +11,7 @@ namespace Treynessen.EnglishPractice
 
         private string programName;
 
-        private Section? parentSection;
         private Section currentSection;
-        private Buttons buttons;
 
         private IUserInterface currentInterface;
         private bool stopped = false;

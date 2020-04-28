@@ -8,7 +8,6 @@ namespace Treynessen.EnglishPractice
         {
             Task programTask = Task.Run(async () =>
             {
-                parentSection = null;
                 currentSection = Section.Menu;
                 while (!stopped)
                 {

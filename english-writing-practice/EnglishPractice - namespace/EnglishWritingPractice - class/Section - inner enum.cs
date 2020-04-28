@@ -6,8 +6,12 @@
         {
             Menu,
             Training,
-            AddPhrase,
-            PhraseList,
+            AddPhrase_LanguageChoice,
+            AddRuPhrase,
+            AddEnPhrase,
+            PhraseList_LanguageChoice,
+            RuPhraseList,
+            EnPhraseList,
             LocalizationSettings,
             SoundSettings
         }
