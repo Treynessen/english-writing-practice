@@ -46,10 +46,11 @@ namespace Treynessen.UI
                     }
                     else if (enterKey.HasValue && pressedKeyInfo.Key == enterKey.Value)
                     {
-                        if (soundEffect()) Console.Beep(700, 80);
-                        buttons[verticalOperationNum, horizontalOperationNum].Press();
+                        Button pressedButton = buttons[verticalOperationNum, horizontalOperationNum];
+                        if (soundEffect() && pressedButton.Active) Console.Beep(700, 80);
+                        pressedButton.Press();
                         stopped = StopAfterClickedEnterKey == null ? true : StopAfterClickedEnterKey();
-                        callUpdateInterface = stopped ? false : true;
+                        callUpdateInterface = !stopped;
                     }
                     if (callUpdateInterface) UpdateInterface();
                 }

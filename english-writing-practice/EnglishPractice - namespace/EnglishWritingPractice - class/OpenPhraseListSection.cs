@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using Treynessen.UI;
-using Treynessen.Functions;
 
 namespace Treynessen.EnglishPractice
 {
@@ -56,7 +53,7 @@ namespace Treynessen.EnglishPractice
             }
             // Создаем кнопку "Назад" и добавляем её в начало списка
             Button backButton = new Button(localization["PhraseList:back_button"]);
-            backButton.OnPressed += () => currentSection = Section.PhraseList_LanguageChoice;
+            backButton.OnPressed += () => this.currentSection = Section.PhraseList_LanguageChoice;
             buttons.AddFirst(new LinkedList<Button>()).Value.AddLast(backButton);
             // Создаем интерфейс
             currentInterface = new ButtonInterface(
@@ -65,50 +62,8 @@ namespace Treynessen.EnglishPractice
                 getTitle: () => $"{programName} - {localization["PhraseList:SectionName"]}",
                 soundEffect: () => soundEffect
             );
-            (currentInterface as ButtonInterface).StopAfterClickedEnterKey += () => currentSection == Section.PhraseList_LanguageChoice;
-        }
-
-        private Action AddOnPressedEventHandlerToLetterButton<T>
-            (Button button, LinkedList<LinkedList<Button>> headerButtons, bool showAllButton = false)
-        {
-            return () =>
-            {
-                Console.Clear();
-                // Получаем список фраз, соответствующие нажатой кнопке
-                IEnumerable<PhraseAndTranslation> phrases = null;
-                if (typeof(T) == typeof(RuPhraseAndTranslation))
-                {
-                    phrases = dataContainer.RuPhrasesDb;
-                }
-                else
-                {
-                    phrases = dataContainer.EnPhrasesDb;
-                }
-                if (!showAllButton)
-                {
-                    Regex regex = new Regex(@"\[ (?<letter1>[A-Z]|[А-Я]) \]");
-                    phrases = phrases.Where(p => p.Phrase.StartsWith(regex.Match(button.Name).Groups[1].ToString(), StringComparison.OrdinalIgnoreCase));
-                }
-                // Создаем кнопки для каждой фразы: Фраза Изменить Удалить
-                LinkedList<LinkedList<Button>> phraseButtons = new LinkedList<LinkedList<Button>>();
-                foreach (var phrase in phrases)
-                {
-                    var verticalNode = phraseButtons.AddLast(new LinkedList<Button>());
-                    Button phraseButton = new Button(phrase.Phrase);
-                    // Добавить обработчик события для phraseButton
-                    verticalNode.Value.AddLast(phraseButton);
-                    Button editButton = new Button(localization["PhraseList:edit_button"]);
-                    // Добавить обработчик события для editButton
-                    verticalNode.Value.AddLast(editButton);
-                    Button deleteButton = new Button(localization["PhraseList:delete_button"]);
-                    // Добавить обработчик события для deleteButton
-                    verticalNode.Value.AddLast(deleteButton);
-                }
-                if (currentInterface is ButtonInterface buttonInterface)
-                {
-                    buttonInterface.Buttons = new Buttons(headerButtons.Union(phraseButtons));
-                }
-            };
+            Section currentSection = this.currentSection;
+            (currentInterface as ButtonInterface).StopAfterClickedEnterKey += () => this.currentSection != currentSection;
         }
     }
 }

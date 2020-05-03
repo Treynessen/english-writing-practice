@@ -7,6 +7,7 @@ namespace Treynessen.EnglishPractice
     {
         private void AddTranslation(PhraseAndTranslation translation)
         {
+            // Здесь нет проверки на activeValue, потому что этот метод используется только в конструкторе
             if (!translation.activeValue)
             {
                 throw new ArgumentException("Passed translation parameter has been deleted");

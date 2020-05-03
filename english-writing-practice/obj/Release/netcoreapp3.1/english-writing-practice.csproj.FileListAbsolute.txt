@@ -1,0 +1,3 @@
+C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\obj\Release\netcoreapp3.1\english-writing-practice.csprojAssemblyReference.cache
+C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\obj\Release\netcoreapp3.1\english-writing-practice.AssemblyInfoInputs.cache
+C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\obj\Release\netcoreapp3.1\english-writing-practice.AssemblyInfo.cs

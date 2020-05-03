@@ -19,3 +19,4 @@ C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\
 C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Primitives.dll
 C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\bin\Debug\netcoreapp3.0\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\obj\Debug\netcoreapp3.0\english-writing-practice.csproj.CopyComplete
+C:\Users\79622\Desktop\Github\english-writing-practice\english-writing-practice\obj\Debug\netcoreapp3.0\english-writing-practice.genruntimeconfig.cache

@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Treynessen.UI;
-using Treynessen.Functions;
 
 namespace Treynessen.EnglishPractice
 {
@@ -32,18 +31,22 @@ namespace Treynessen.EnglishPractice
             {
                 phrase = data.ElementAt(0);
                 translation = data.ElementAt(1);
-                if (typeof(T) == typeof(RuPhraseAndTranslation))
+                try
                 {
-                    RuPhraseAndTranslation.Create(phrase, translation, dataContainer.RuPhrasesDb, dataContainer.EnPhrasesDb);
+                    if (typeof(T) == typeof(RuPhraseAndTranslation))
+                    {
+                        RuPhraseAndTranslation.Create(phrase, translation, dataContainer.RuPhrasesDb, dataContainer.EnPhrasesDb);
+                    }
+                    else
+                    {
+                        EnPhraseAndTranslation.Create(phrase, translation, dataContainer.EnPhrasesDb, dataContainer.RuPhrasesDb);
+                    }
                 }
-                else
+                catch (PhraseExistsException exception)
                 {
-                    EnPhraseAndTranslation.Create(phrase, translation, dataContainer.EnPhrasesDb, dataContainer.RuPhrasesDb);
+                    exception.Phrase.AddTranslation(translation);
                 }
-                StaticFunctions.Serialize(
-                    path: "dictionary.data",
-                    obj: dataContainer
-                );
+                SerializeDataContainer();
             };
             (currentInterface as TextInputtingInterface).OnEnding += () => currentSection = Section.AddPhrase_LanguageChoice;
         }

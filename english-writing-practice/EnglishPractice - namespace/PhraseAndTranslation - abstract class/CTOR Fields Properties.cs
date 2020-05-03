@@ -7,6 +7,7 @@ namespace Treynessen.EnglishPractice
     [Serializable]
     public abstract partial class PhraseAndTranslation
     {
+        public bool Deleted => !activeValue;
         private bool activeValue = true;
 
         protected IEnumerable<PhraseAndTranslation> phraseDb;
@@ -22,7 +23,7 @@ namespace Treynessen.EnglishPractice
             {
                 throw new ArgumentException("Passed phrase argument is undefined");
             }
-            if(phraseDb == null)
+            if (phraseDb == null)
             {
                 throw new ArgumentException("Passed phraseDb argument is undefined");
             }
@@ -35,7 +36,7 @@ namespace Treynessen.EnglishPractice
             var found = phraseDb.FirstOrDefault(p => p.Phrase.Equals(phrase, StringComparison.OrdinalIgnoreCase));
             if (found != null)
             {
-                throw new ArgumentException("Passed phrase argument has already existed in Database");
+                throw new PhraseExistsException(found);
             }
             Phrase = phrase;
             Translations = new LinkedList<PhraseAndTranslation>();

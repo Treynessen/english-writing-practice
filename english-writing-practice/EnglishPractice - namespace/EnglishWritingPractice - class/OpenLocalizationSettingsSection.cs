@@ -18,11 +18,7 @@ namespace Treynessen.EnglishPractice
                 getTitle: () => $"{programName} - {localization["LocalizationSettings:SectionName"]}",
                 soundEffect: () => soundEffect
             );
-            (currentInterface as ButtonInterface).StopAfterClickedEnterKey += () =>
-            {
-                if (currentSection == Section.Menu) return true;
-                else return false;
-            };
+            (currentInterface as ButtonInterface).StopAfterClickedEnterKey += () => currentSection != Section.LocalizationSettings;
         }
 
         private Buttons BuildLocalizationButtons()

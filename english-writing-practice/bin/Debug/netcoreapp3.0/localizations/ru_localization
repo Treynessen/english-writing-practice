@@ -38,6 +38,11 @@ show_all_button=Отобразить все фразы
 back_button=Назад
 edit_button=Изменить
 delete_button=Удалить
+phrase=Фраза
+translations=Перевод
+input_new_phrase=Новое значение
+current_phrase=текущая фраза -
+input_empty_to_exit=Для выхода введите пустое значение
 
 [LocalizationSettings]
 SectionName=Настройка языка

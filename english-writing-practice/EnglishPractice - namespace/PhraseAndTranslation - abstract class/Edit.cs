@@ -15,7 +15,7 @@ namespace Treynessen.EnglishPractice
             {
                 throw new ArgumentException("newPhrase argument is undefined");
             }
-            var found = phraseDb.FirstOrDefault(pt => pt.Phrase.Equals(newPhrase, StringComparison.OrdinalIgnoreCase));
+            var found = phraseDb.FirstOrDefault(pt => !pt.Equals(this) && pt.Phrase.Equals(newPhrase, StringComparison.OrdinalIgnoreCase));
             // Если объект с такой фразой уже существует, тогда удаляем текущий объект и переносим туда коллекцию Translations
             if (found != null)
             {
