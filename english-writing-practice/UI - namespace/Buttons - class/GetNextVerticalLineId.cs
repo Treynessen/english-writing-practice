@@ -2,9 +2,9 @@
 {
     public partial class Buttons
     {
-        public int GetNextVerticalLineId(int currentVerticalLineId)
+        public int GetNextVerticalLineId(int verticalLineId)
         {
-            return currentVerticalLineId >= buttons.Length ? 1 : currentVerticalLineId + 1;
+            return verticalLineId >= verticalLineCount ? 1 : verticalLineId + 1;
         }
     }
 }

@@ -2,6 +2,6 @@
 {
     public partial class Buttons
     {
-        public bool VerticalControlAvailable() => buttons.Length > 1;
+        public bool VerticalControlAvailable() => buttonGrid.Count > 1;
     }
 }

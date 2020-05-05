@@ -8,7 +8,7 @@ namespace Treynessen.EnglishPractice
         private void OpenSoundSettingsSection()
         {
             Buttons buttons = BuildSectionButtons();
-            buttons[1].OnPressed += () =>
+            buttons[1].OnPressed += (o, args) =>
             {
                 soundEffect = true;
                 StaticFunctions.EditSettingInConfig(
@@ -18,7 +18,7 @@ namespace Treynessen.EnglishPractice
                 );
                 StaticFunctions.OpenConfig("config.ini", out coreConfiguration);
             };
-            buttons[2].OnPressed += () =>
+            buttons[2].OnPressed += (o, args) =>
             {
                 soundEffect = false;
                 StaticFunctions.EditSettingInConfig(
@@ -28,7 +28,7 @@ namespace Treynessen.EnglishPractice
                 );
                 StaticFunctions.OpenConfig("config.ini", out coreConfiguration);
             };
-            buttons[3].OnPressed += () => currentSection = Section.Menu;
+            buttons[3].OnPressed += (o, args) => currentSection = Section.Menu;
             currentInterface = new ButtonInterface(
                 buttons: buttons,
                 controlKeyContainer: controlKeyContainer,

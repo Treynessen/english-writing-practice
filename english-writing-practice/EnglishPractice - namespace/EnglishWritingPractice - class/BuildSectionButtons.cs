@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Linq;
+using System.Text.RegularExpressions;
 using Treynessen.UI;
 
 namespace Treynessen.EnglishPractice
@@ -8,26 +10,23 @@ namespace Treynessen.EnglishPractice
         // Получение кнопок для текущего раздела из файла с локализацией
         private Buttons BuildSectionButtons()
         {
-            var buttons = new LinkedList<LinkedList<string>>();
-            var buttonsSection = localization.GetSection(currentSection.ToString());
-            bool stop = false;
-            for (int verticalLineId = 1; !stop; ++verticalLineId)
+            Buttons buttons = new Buttons();
+            Regex regex = new Regex(@"^button_(?<verticalLineId>\d+)_(?<horizontalButtonId>\d+)$", RegexOptions.IgnoreCase);
+            var buttonDatas = from section in localization.GetSection(currentSection.ToString()).GetChildren()
+                              let match = regex.Match(section.Key)
+                              where match.Success
+                              let verticalLineId = Convert.ToInt32(match.Groups["verticalLineId"].Value)
+                              let horizontalButtonId = Convert.ToInt32(match.Groups["horizontalButtonId"].Value)
+                              orderby verticalLineId, horizontalButtonId
+                              select new { verticalLineId, horizontalButtonId, Name = section.Value };
+            foreach (var buttonData in buttonDatas)
             {
-                LinkedListNode<LinkedList<string>> node = null;
-                for (int horizontalButtonId = 1; ; ++horizontalButtonId)
-                {
-                    string buttonName = buttonsSection[$"button_{verticalLineId}_{horizontalButtonId}"];
-                    // Если не удалось получить следующую кнопку (больше кнопок в строке нет), тогда выходим из цикла
-                    if (buttonName == null) break;
-                    if (node == null)
-                    {
-                        node = buttons.AddLast(new LinkedList<string>());
-                    }
-                    node.Value.AddLast(buttonName);
-                }
-                if (node == null) stop = true;
+                buttons.AddButton(
+                    buttonPosition: (buttonData.verticalLineId, buttonData.horizontalButtonId),
+                    button: new Button(buttonData.Name)
+                );
             }
-            return new Buttons(buttons);
+            return buttons;
         }
     }
 }

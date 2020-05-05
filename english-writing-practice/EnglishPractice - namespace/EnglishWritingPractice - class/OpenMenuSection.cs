@@ -7,12 +7,12 @@ namespace Treynessen.EnglishPractice
         private void OpenMenuSection()
         {
             Buttons buttons = BuildSectionButtons();
-            buttons[1].OnPressed += () => { };
-            buttons[2].OnPressed += () => currentSection = Section.AddPhrase_LanguageChoice;
-            buttons[3].OnPressed += () => currentSection = Section.PhraseList_LanguageChoice;
-            buttons[4].OnPressed += () => currentSection = Section.LocalizationSettings;
-            buttons[5].OnPressed += () => currentSection = Section.SoundSettings;
-            buttons[6].OnPressed += () => Stop();
+            buttons[1].OnPressed += (o, args) => { };
+            buttons[2].OnPressed += (o, args) => currentSection = Section.AddPhrase_LanguageChoice;
+            buttons[3].OnPressed += (o, args) => currentSection = Section.PhraseList_LanguageChoice;
+            buttons[4].OnPressed += (o, args) => currentSection = Section.LocalizationSettings;
+            buttons[5].OnPressed += (o, args) => currentSection = Section.SoundSettings;
+            buttons[6].OnPressed += (o, args) => Stop();
             currentInterface = new ButtonInterface(
                 buttons: buttons,
                 controlKeyContainer: controlKeyContainer,

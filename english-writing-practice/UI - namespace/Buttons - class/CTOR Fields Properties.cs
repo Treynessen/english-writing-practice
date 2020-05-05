@@ -1,59 +1,65 @@
-﻿using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Treynessen.UI
 {
     public partial class Buttons
     {
-        private Button[][] buttons;
+        private LinkedList<LinkedList<Button>> buttonGrid;
 
-        public int Count
+        private int buttonCount = 0;
+        private int verticalLineCount = 0;
+
+        public int ButtonCount
         {
             get
             {
-                int count = 0;
-                for (int verticalLineId = 0; verticalLineId < buttons.Length; ++verticalLineId)
+                if (buttonCount == 0)
                 {
-                    count += buttons[verticalLineId].Length;
+                    foreach (var buttonLine in buttonGrid)
+                    {
+                        buttonCount += buttonLine.Count;
+                    }
                 }
-                return count;
+                return buttonCount;
             }
         }
 
-        public Buttons(LinkedList<LinkedList<string>> buttonList)
+        public int VerticalLineCount
         {
-            buttons = new Button[buttonList.Count][];
-            int verticalLineId = 0;
-            foreach (var horizontalButtons in buttonList)
+            get
             {
-                buttons[verticalLineId] = new Button[horizontalButtons.Count];
-                int horizontalButtonId = 0;
-                foreach (var buttonName in horizontalButtons)
+                if (verticalLineCount == 0)
                 {
-                    buttons[verticalLineId][horizontalButtonId++] = new Button(buttonName);
+                    verticalLineCount = buttonGrid.Count;
                 }
-                ++verticalLineId;
+                return verticalLineCount;
             }
         }
 
-        public Buttons(IEnumerable<LinkedList<Button>> buttonList)
+        public Buttons()
         {
-            buttons = new Button[buttonList.Count()][];
-            int verticalLineId = 0;
-            foreach (var horizontalButtons in buttonList)
+            buttonGrid = new LinkedList<LinkedList<Button>>();
+        }
+
+        public Buttons(LinkedList<LinkedList<Button>> buttonGrid) : this()
+        {
+            this.buttonGrid = buttonGrid;
+            verticalLineCount = this.buttonGrid.Count;
+            buttonCount = ButtonCount;
+        }
+
+        public Buttons(LinkedList<LinkedList<string>> buttonNames) : this()
+        {
+            foreach (var buttonLine in buttonNames)
             {
-                buttons[verticalLineId] = new Button[horizontalButtons.Count];
-                int horizontalButtonId = 0;
-                foreach (var button in horizontalButtons)
+                var thisButtonLine = buttonGrid.AddLast(new LinkedList<Button>()).Value;
+                ++verticalLineCount;
+                foreach (var buttonName in buttonLine)
                 {
-                    buttons[verticalLineId][horizontalButtonId++] = button;
+                    thisButtonLine.AddLast(new Button(buttonName));
+                    ++buttonCount;
                 }
-                ++verticalLineId;
             }
-        }
-
-        public Buttons(LinkedList<LinkedList<Button>> buttonList) : this(buttonList as IEnumerable<LinkedList<Button>>)
-        {
         }
     }
 }

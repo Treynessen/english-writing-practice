@@ -2,10 +2,13 @@
 {
     public partial class Buttons
     {
-        public int GetPreviousHorizontalButtonId(int currentVerticalLineId, int currentHorizontalButtonId)
+        public int GetPreviousHorizontalButtonId(int verticalLineId, int horizontalButtonId)
         {
-            int columnCount = GetHorizontalButtonCount(currentVerticalLineId);
-            return currentHorizontalButtonId <= 1 ? columnCount : currentHorizontalButtonId - 1;
+            int horizontalButtonCount = GetHorizontalButtonCount(verticalLineId);
+            return horizontalButtonId <= 1 ? horizontalButtonCount : horizontalButtonId - 1;
         }
+
+        public int GetPreviousHorizontalButtonId((int, int) buttonPosition) 
+            => GetPreviousHorizontalButtonId(buttonPosition.Item1, buttonPosition.Item2);
     }
 }

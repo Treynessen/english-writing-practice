@@ -34,7 +34,7 @@ namespace Treynessen.EnglishPractice
                 );
                 string localizationName = localizationConfig["Name"];
                 Button button = new Button(localizationName);
-                button.OnPressed += () =>
+                button.OnPressed += (o, args) =>
                 {
                     StaticFunctions.OpenConfig(
                         path: localizationPath,
@@ -54,13 +54,13 @@ namespace Treynessen.EnglishPractice
                     // Изменяем название кнопки назад в зависимости от текущей локализации
                     if (currentInterface is ButtonInterface buttonInterface)
                     {
-                        buttonInterface.Buttons[buttonInterface.Buttons.Count].Rename(localization["LocalizationSettings:button_1_1"]);
+                        buttonInterface.Buttons[buttonInterface.Buttons.ButtonCount].Rename(localization["LocalizationSettings:button_1_1"]);
                     }
                 };
                 buttons.AddLast(new LinkedList<Button>()).Value.AddLast(button);
             }
             Button backButton = new Button(localization["LocalizationSettings:button_1_1"]);
-            backButton.OnPressed += () => currentSection = Section.Menu;
+            backButton.OnPressed += (o, args) => currentSection = Section.Menu;
             buttons.AddLast(new LinkedList<Button>()).Value.AddLast(backButton);
             return new Buttons(buttons);
         }

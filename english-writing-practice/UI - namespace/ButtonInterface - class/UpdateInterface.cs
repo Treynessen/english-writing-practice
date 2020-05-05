@@ -12,7 +12,7 @@ namespace Treynessen.UI
             {
                 Console.WriteLine(headerText);
             }
-            for (int rowId = 1; rowId <= buttons.GetVerticalLineCount(); ++rowId)
+            for (int rowId = 1; rowId <= buttons.VerticalLineCount; ++rowId)
             {
                 for (int columnId = 1; columnId <= buttons.GetHorizontalButtonCount(rowId); ++columnId)
                 {

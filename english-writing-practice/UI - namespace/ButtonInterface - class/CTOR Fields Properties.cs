@@ -4,7 +4,7 @@ namespace Treynessen.UI
 {
     public partial class ButtonInterface : IUserInterface
     {
-        Func<string> getTitle;
+        private Func<string> getTitle;
         private ConsoleKey? leftKey, rightKey, upKey, downKey, enterKey;
         private ConsoleColor unselectedButton_textColor = IUserInterface.DefaultTextColor;
         private ConsoleColor unselectedButton_selectionColor = IUserInterface.DefaultBackgroundColor;
@@ -32,7 +32,7 @@ namespace Treynessen.UI
             get => (verticalOperationNum, horizontalOperationNum);
             set
             {
-                if (value.Item1 < 1 || value.Item1 > buttons.GetVerticalLineCount())
+                if (!buttons.VerticalLineExists(value.Item1))
                 {
                     throw new ArgumentException("Vertical position is incorrect");
                 }

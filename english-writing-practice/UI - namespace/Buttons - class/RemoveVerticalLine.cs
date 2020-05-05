@@ -6,23 +6,22 @@ namespace Treynessen.UI
     {
         public void RemoveVerticalLine(int verticalLineId)
         {
-            if (verticalLineId > GetVerticalLineCount())
+            if (!VerticalLineExists(verticalLineId))
             {
-                throw new ArgumentException($"Vertical line №{verticalLineId} not found");
+                throw new ArgumentException($"Vertical line №{verticalLineId} doesn't exist");
             }
-            Button[][] buttons = new Button[GetVerticalLineCount() - 1][];
-            for (int thisButtonsVerticalLineIt = 0, newButtonsVerticalLineIt = 0;
-                thisButtonsVerticalLineIt < GetVerticalLineCount();
-                ++thisButtonsVerticalLineIt, ++newButtonsVerticalLineIt)
+            int currentVerticalLineId = 1;
+            for (var buttonLineNode = buttonGrid.First; buttonLineNode != null; buttonLineNode = buttonLineNode.Next)
             {
-                if (thisButtonsVerticalLineIt == verticalLineId - 1)
+                if (currentVerticalLineId == verticalLineId)
                 {
-                    --newButtonsVerticalLineIt;
-                    continue;
+                    buttonCount -= buttonLineNode.Value.Count;
+                    buttonGrid.Remove(buttonLineNode);
+                    --verticalLineCount;
+                    break;
                 }
-                buttons[newButtonsVerticalLineIt] = this.buttons[thisButtonsVerticalLineIt];
+                ++currentVerticalLineId;
             }
-            this.buttons = buttons;
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Treynessen.UI
     {
         public void Press()
         {
-            OnPressed?.Invoke();
+            OnPressed?.Invoke(this, EventArgs.Empty);
         }
     }
 }

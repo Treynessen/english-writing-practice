@@ -8,78 +8,78 @@ namespace Treynessen.EnglishPractice
 {
     public partial class EnglishWritingPractice
     {
-        private Action AddOnPressedEventHandlerToLetterButton<T>
-            (Button button, LinkedList<LinkedList<Button>> headerButtons, bool showAllButton = false)
+        private EventHandler AddOnPressedEventHandlerToLetterButton<T>(Buttons headerButtons, bool showAllButton = false)
         {
-            return () =>
+            return (object o, EventArgs args) =>
             {
-                Console.Clear();
-                // Получаем список фраз, соответствующие нажатой кнопке
-                IEnumerable<PhraseAndTranslation> phrases = null;
-                if (typeof(T) == typeof(RuPhraseAndTranslation))
+                if (o is Button button)
                 {
-                    phrases = dataContainer.RuPhrasesDb;
-                }
-                else
-                {
-                    phrases = dataContainer.EnPhrasesDb;
-                }
-                if (!showAllButton)
-                {
-                    Regex regex = new Regex(@"\[ (?<letter1>[A-Z]|[А-Я]) \]");
-                    phrases = phrases.Where(p => p.Phrase.StartsWith(regex.Match(button.Name).Groups[1].ToString(), StringComparison.OrdinalIgnoreCase));
-                }
-                // Создаем кнопки для каждой фразы: Фраза Изменить Удалить
-                LinkedList<LinkedList<Button>> phraseButtons = new LinkedList<LinkedList<Button>>();
-                foreach (var phrase in phrases)
-                {
-                    var verticalNode = phraseButtons.AddLast(new LinkedList<Button>());
-                    // Добавляем кнопку для получения информации о фразе
-                    Button phraseButton = new Button(phrase.Phrase);
-                    phraseButton.OnPressed += () =>
+                    // Получаем список фраз, соответствующие нажатой кнопке
+                    IEnumerable<PhraseAndTranslation> phrases = null;
+                    if (typeof(T) == typeof(RuPhraseAndTranslation))
                     {
-                        // Сделать отдельную секцию для информации о переводе
-                        // Сделать Button Interface с возможностью удаления перевода
-                    };
-                    verticalNode.Value.AddLast(phraseButton);
-                    // Добавляем кнопку редактирования фразы
-                    Button editButton = new Button(localization["PhraseList:edit_button"]);
-                    editButton.OnPressed += () =>
+                        phrases = dataContainer.RuPhrasesDb;
+                    }
+                    else
                     {
-                        Console.Clear();
-                        Console.CursorVisible = true;
-                        Console.WriteLine(localization["PhraseList:input_empty_to_exit"]);
-                        Console.WriteLine($"{localization["PhraseList:input_new_phrase"]} ({localization["PhraseList:current_phrase"]} {phrase.Phrase}):");
-                        string newPhrase = Console.ReadLine();
-                        if (!string.IsNullOrEmpty(newPhrase))
+                        phrases = dataContainer.EnPhrasesDb;
+                    }
+                    if (!showAllButton)
+                    {
+                        Regex regex = new Regex(@"\[ (?<letter>[A-Z]|[А-Я]) \]");
+                        phrases = phrases.Where(p => p.Phrase.StartsWith(regex.Match(button.Name).Groups["letter"].ToString(), StringComparison.OrdinalIgnoreCase));
+                    }
+                    // Создаем кнопки для каждой фразы: Фраза Изменить Удалить
+                    Buttons phraseButtons = new Buttons();
+                    foreach (var phrase in phrases)
+                    {
+                        // Добавляем кнопку для получения информации о фразе
+                        Button phraseButton = new Button(phrase.Phrase);
+                        phraseButton.OnPressed += (_o, _args) =>
                         {
-                            phrase.Edit(newPhrase);
-                            phraseButton.Rename(newPhrase);
-                        }
-                        Console.CursorVisible = false;
-                    };
-                    verticalNode.Value.AddLast(editButton);
-                    // Добавляем кнопку удаления
-                    Button deleteButton = new Button(localization["PhraseList:delete_button"]);
-                    deleteButton.OnPressed += () =>
-                    {
-                        phrase.Delete();
-                        if (currentInterface is ButtonInterface buttonInterface)
+                            // Сделать отдельную секцию для информации о переводе
+                            // Сделать Button Interface с возможностью удаления перевода
+                        };
+                        phraseButtons.AddButton(phraseButtons.VerticalLineCount + 1, 1, phraseButton);
+                        // Добавляем кнопку редактирования фразы
+                        Button editButton = new Button(localization["PhraseList:edit_button"]);
+                        editButton.OnPressed += (_o, _args) =>
                         {
-                            int currentVerticalLineId = buttonInterface.Position.Item1;
-                            buttonInterface.Buttons.RemoveVerticalLine(currentVerticalLineId);
-                            if (currentVerticalLineId > buttonInterface.Buttons.GetVerticalLineCount())
+                            Console.Clear();
+                            Console.CursorVisible = true;
+                            Console.WriteLine(localization["PhraseList:input_empty_to_exit"]);
+                            Console.WriteLine($"{localization["PhraseList:input_new_phrase"]} ({localization["PhraseList:current_phrase"]} {phrase.Phrase}):");
+                            string newPhrase = Console.ReadLine();
+                            if (!string.IsNullOrEmpty(newPhrase))
                             {
-                                buttonInterface.Position = (currentVerticalLineId - 1, buttonInterface.Position.Item2);
+                                phrase.Edit(newPhrase);
+                                phraseButton.Rename(newPhrase);
                             }
-                        }
-                        SerializeDataContainer();
-                    };
-                    verticalNode.Value.AddLast(deleteButton);
-                }
-                if (currentInterface is ButtonInterface buttonInterface)
-                {
-                    buttonInterface.Buttons = new Buttons(headerButtons.Union(phraseButtons));
+                            Console.CursorVisible = false;
+                        };
+                        phraseButtons.AddButton(phraseButtons.VerticalLineCount, 2, editButton);
+                        // Добавляем кнопку удаления
+                        Button deleteButton = new Button(localization["PhraseList:delete_button"]);
+                        deleteButton.OnPressed += (_o, _args) =>
+                        {
+                            phrase.Delete();
+                            if (currentInterface is ButtonInterface buttonInterface)
+                            {
+                                int currentVerticalLineId = buttonInterface.Position.Item1;
+                                buttonInterface.Buttons.RemoveVerticalLine(currentVerticalLineId);
+                                if (currentVerticalLineId > buttonInterface.Buttons.VerticalLineCount)
+                                {
+                                    buttonInterface.Position = (currentVerticalLineId - 1, buttonInterface.Position.Item2);
+                                }
+                            }
+                            SerializeDataContainer();
+                        };
+                        phraseButtons.AddButton(phraseButtons.VerticalLineCount, 3, deleteButton);
+                    }
+                    if (currentInterface is ButtonInterface buttonInterface)
+                    {
+                        buttonInterface.Buttons = Buttons.Union(headerButtons, phraseButtons);
+                    }
                 }
             };
         }

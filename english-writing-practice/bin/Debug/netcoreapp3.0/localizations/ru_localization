@@ -33,7 +33,6 @@ button_3_1=Назад
 
 [PhraseList]
 SectionName=Список фраз
-letter_grid_horizontal_count=7
 show_all_button=Отобразить все фразы
 back_button=Назад
 edit_button=Изменить

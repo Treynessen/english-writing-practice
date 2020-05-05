@@ -2,9 +2,9 @@
 {
     public partial class Buttons
     {
-        public int GetPreviousVerticalLineId(int currentVerticalLineId)
+        public int GetPreviousVerticalLineId(int verticalLineId)
         {
-            return currentVerticalLineId <= 1 ? GetVerticalLineCount() : currentVerticalLineId - 1;
+            return verticalLineId <= 1 ? verticalLineCount : verticalLineId - 1;
         }
     }
 }

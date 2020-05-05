@@ -6,39 +6,92 @@ namespace Treynessen.UI
     {
         public void RemoveButton(int verticalLineId, int horizontalButtonId)
         {
-            if (verticalLineId > GetVerticalLineCount() || horizontalButtonId > GetHorizontalButtonCount(verticalLineId))
+            if (!ButtonExists(verticalLineId, horizontalButtonId))
             {
-                throw new ArgumentException($"Button[{verticalLineId};{horizontalButtonId}] not found");
+                throw new ArgumentException($"Button[{verticalLineId};{horizontalButtonId}] doesn't exist");
             }
-            if (GetHorizontalButtonCount(verticalLineId) <= 1)
+            int currentVerticalLineId = 1;
+            for (var verticalLineNode = buttonGrid.First; verticalLineNode != null; verticalLineNode = verticalLineNode.Next)
             {
-                RemoveVerticalLine(verticalLineId);
-            }
-            else
-            {
-                Button[][] buttons = new Button[GetVerticalLineCount()][];
-                for (int verticalLineIt = 0; verticalLineIt < GetVerticalLineCount(); ++verticalLineIt)
+                if (currentVerticalLineId == verticalLineId)
                 {
-                    if (verticalLineIt == verticalLineId - 1)
+                    int currentHorizontalButtonId = 1;
+                    for (var buttonNode = verticalLineNode.Value.First; buttonNode != null; buttonNode = buttonNode.Next)
                     {
-                        for (int thisButtonsHorizontalButtonIt = 0, newButtonsHorizontalButtonIt = 0;
-                            thisButtonsHorizontalButtonIt < GetHorizontalButtonCount(verticalLineIt);
-                            ++thisButtonsHorizontalButtonIt, ++newButtonsHorizontalButtonIt)
+                        if (currentHorizontalButtonId == horizontalButtonId)
                         {
-                            if (thisButtonsHorizontalButtonIt == horizontalButtonId - 1)
+                            verticalLineNode.Value.Remove(buttonNode);
+                            if (verticalLineNode.Value.Count == 0)
                             {
-                                --newButtonsHorizontalButtonIt;
-                                continue;
+                                buttonGrid.Remove(verticalLineNode);
+                                --verticalLineCount;
                             }
-                            buttons[verticalLineIt][newButtonsHorizontalButtonIt] = this.buttons[verticalLineIt][thisButtonsHorizontalButtonIt];
+                            --buttonCount;
+                            return;
+                        }
+                        ++currentHorizontalButtonId;
+                    }
+                    break;
+                }
+                ++currentVerticalLineId;
+            }
+        }
+
+        public void RemoveButton((int, int) buttonPosition)
+        {
+            RemoveButton(buttonPosition.Item1, buttonPosition.Item2);
+        }
+
+        public void RemoveButton(int buttonId)
+        {
+            if (!ButtonExists(buttonId))
+            {
+                throw new IndexOutOfRangeException($"Button №{buttonId} doesn't exist");
+            }
+            int currentButtonId = 0;
+            for (var verticalLineNode = buttonGrid.First; verticalLineNode != null; verticalLineNode = verticalLineNode.Next)
+            {
+                if (currentButtonId + verticalLineNode.Value.Count >= buttonId)
+                {
+                    for (var buttonNode = verticalLineNode.Value.First; buttonNode != null; buttonNode = buttonNode.Next)
+                    {
+                        ++currentButtonId;
+                        if (currentButtonId == buttonId)
+                        {
+                            verticalLineNode.Value.Remove(buttonNode);
+                            if (verticalLineNode.Value.Count == 0)
+                            {
+                                buttonGrid.Remove(verticalLineNode);
+                                --verticalLineCount;
+                            }
+                            --buttonCount;
+                            return;
                         }
                     }
-                    else
+                    break;
+                }
+                currentButtonId += verticalLineNode.Value.Count;
+            }
+        }
+
+        public void RemoveButton(Button button)
+        {
+            for (var buttonLineNode = buttonGrid.First; buttonLineNode != null; buttonLineNode = buttonLineNode.Next)
+            {
+                for (var buttonNode = buttonLineNode.Value.First; buttonNode != null; buttonNode = buttonNode.Next)
+                {
+                    if (ReferenceEquals(buttonNode.Value, button))
                     {
-                        buttons[verticalLineIt] = this.buttons[verticalLineIt];
+                        buttonLineNode.Value.Remove(buttonNode);
+                        --buttonCount;
+                        if (buttonLineNode.Value.Count == 0)
+                        {
+                            buttonGrid.Remove(buttonLineNode);
+                            --verticalLineCount;
+                        }
+                        return;
                     }
                 }
-                this.buttons = buttons;
             }
         }
     }

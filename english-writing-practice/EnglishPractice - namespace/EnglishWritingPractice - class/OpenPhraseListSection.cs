@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Treynessen.UI;
 
 namespace Treynessen.EnglishPractice
@@ -8,10 +7,18 @@ namespace Treynessen.EnglishPractice
     {
         private void OpenPhraseListSection<T>() where T : PhraseAndTranslation
         {
-            // Кнопки интерфейса
-            LinkedList<LinkedList<Button>> buttons = new LinkedList<LinkedList<Button>>();
-            // Создаем список для кнопок букв
-            buttons.AddLast(new LinkedList<Button>());
+            Buttons buttons = new Buttons();
+            // Создаем и добавляем кнопку Назад
+            Button backButton = new Button(localization["PhraseList:back_button"]);
+            backButton.OnPressed += (o, args) => this.currentSection = Section.PhraseList_LanguageChoice;
+            buttons.AddButton(1, 1, backButton);
+            // Создаем и добавляем кнопку Показать все фразы
+            Button showAllPhrases = new Button($"[ {localization["PhraseList:show_all_button"]} ]");
+            showAllPhrases.OnPressed += AddOnPressedEventHandlerToLetterButton<T>(buttons, true); // 2 - кнопка Назад и кнопка Показать все фразы
+            buttons.AddButton(2, 1, showAllPhrases);
+            // Получаем количество кнопок букв в линии 
+            int letterButtonHorizontalCount = Convert.ToInt32(coreConfiguration["letter_button_horizontal_count"]);
+            // Создаем и добавляем кнопки букв
             string letters = null;
             if (typeof(T) == typeof(RuPhraseAndTranslation))
             {
@@ -21,43 +28,22 @@ namespace Treynessen.EnglishPractice
             {
                 letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             }
-            // Добавляем кнопку "Все фразы" и кнопки букв
-            buttons.Last.Value.AddLast(new Button($"[ {localization["PhraseList:show_all_button"]} ]"));
-            buttons.AddLast(new LinkedList<Button>());
-            int letterGridHorizontalCount = Convert.ToInt32(localization["PhraseList:letter_grid_horizontal_count"]);
-            int previousFirstEl = 0;
-            for (int i = 0; i < letters.Length; ++i)
+            int verticalLineId = 3, horizontalButtonId = 1;
+            foreach (var letter in letters)
             {
-                if (previousFirstEl + letterGridHorizontalCount == i)
+                if (horizontalButtonId > letterButtonHorizontalCount)
                 {
-                    previousFirstEl = i;
-                    buttons.AddLast(new LinkedList<Button>());
+                    ++verticalLineId;
+                    horizontalButtonId = 1;
                 }
-                Button button = new Button($"[ {letters[i]} ]");
-                buttons.Last.Value.AddLast(button);
+                Button letterButton = new Button($"[ {letter} ]");
+                letterButton.OnPressed += AddOnPressedEventHandlerToLetterButton<T>(buttons); // 2 - кнопка Назад и кнопка Показать все фразы
+                buttons.AddButton(verticalLineId, horizontalButtonId, letterButton);
+                ++horizontalButtonId;
             }
-            // Добавляем события OnPressed к вышедобаленным кнопкам
-            for (var verticalLineNode = buttons.First; verticalLineNode != null; verticalLineNode = verticalLineNode.Next)
-            {
-                for (var buttonNode = verticalLineNode.Value.First; buttonNode != null; buttonNode = buttonNode.Next)
-                {
-                    if (buttonNode != buttons.First.Value.First)
-                    {
-                        buttonNode.Value.OnPressed += AddOnPressedEventHandlerToLetterButton<T>(buttonNode.Value, buttons);
-                    }
-                    else
-                    {
-                        buttonNode.Value.OnPressed += AddOnPressedEventHandlerToLetterButton<T>(buttonNode.Value, buttons, true);
-                    }
-                }
-            }
-            // Создаем кнопку "Назад" и добавляем её в начало списка
-            Button backButton = new Button(localization["PhraseList:back_button"]);
-            backButton.OnPressed += () => this.currentSection = Section.PhraseList_LanguageChoice;
-            buttons.AddFirst(new LinkedList<Button>()).Value.AddLast(backButton);
             // Создаем интерфейс
             currentInterface = new ButtonInterface(
-                buttons: new Buttons(buttons),
+                buttons: buttons,
                 controlKeyContainer: controlKeyContainer,
                 getTitle: () => $"{programName} - {localization["PhraseList:SectionName"]}",
                 soundEffect: () => soundEffect
