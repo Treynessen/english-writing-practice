@@ -20,7 +20,7 @@ namespace Treynessen.UI
                     {
                         Console.Write("   ");
                     }
-                    if (rowId == verticalOperationNum && columnId == horizontalOperationNum)
+                    if (rowId == verticalPosition && columnId == horizontalPosition)
                     {
                         Console.ForegroundColor = selectedButton_textColor;
                         Console.BackgroundColor = selectedText_selectionColor;

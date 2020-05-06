@@ -45,11 +45,17 @@ namespace Treynessen.EnglishPractice
             currentInterface = new ButtonInterface(
                 buttons: buttons,
                 controlKeyContainer: controlKeyContainer,
-                getTitle: () => $"{programName} - {localization["PhraseList:SectionName"]}",
-                soundEffect: () => soundEffect
+                getTitle: () => $"{programName} - {localization["PhraseList:section_name"]}",
+                withSoundEffect: () => soundEffect
             );
             Section currentSection = this.currentSection;
-            (currentInterface as ButtonInterface).StopAfterClickedEnterKey += () => this.currentSection != currentSection;
+            (currentInterface as ButtonInterface).OnPressedEnter += (o, args) =>
+            {
+                if (this.currentSection != currentSection)
+                {
+                    (o as ButtonInterface)?.StopSinceNextFrame();
+                }
+            };
         }
     }
 }

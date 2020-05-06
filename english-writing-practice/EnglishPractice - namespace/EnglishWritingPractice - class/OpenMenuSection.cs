@@ -16,10 +16,10 @@ namespace Treynessen.EnglishPractice
             currentInterface = new ButtonInterface(
                 buttons: buttons,
                 controlKeyContainer: controlKeyContainer,
-                getTitle: () => $"{programName} - {localization["Menu:SectionName"]}",
-                soundEffect: () => soundEffect
+                getTitle: () => $"{programName} - {localization["Menu:section_name"]}",
+                withSoundEffect: () => soundEffect
             );
-            (currentInterface as ButtonInterface).StopAfterClickedEnterKey += () => true;
+            (currentInterface as ButtonInterface).OnPressedEnter += (o, args) => (o as ButtonInterface)?.StopSinceNextFrame();
         }
     }
 }

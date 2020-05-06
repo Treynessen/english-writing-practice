@@ -37,8 +37,58 @@ namespace Treynessen.EnglishPractice
                         Button phraseButton = new Button(phrase.Phrase);
                         phraseButton.OnPressed += (_o, _args) =>
                         {
-                            // Сделать отдельную секцию для информации о переводе
-                            // Сделать Button Interface с возможностью удаления перевода
+                            Buttons phraseInfoButtons = new Buttons();
+                            ButtonInterface infoInterface = new ButtonInterface(
+                                buttons: phraseInfoButtons,
+                                controlKeyContainer: controlKeyContainer,
+                                getTitle: () => $"{programName} - {localization["PhraseList:phrase_info"]}",
+                                withSoundEffect: () => soundEffect,
+                                headerText: $"{localization["PhraseList:phrase"]}: {phrase.Phrase}\n{localization["PhraseList:translations"]}:"
+                            );
+                            // Создаем кнопки удаления перевода
+                            int currentVerticalLine = 1;
+                            foreach (var translation in phrase.Translations)
+                            {
+                                Button translationButton = new Button(translation.Phrase, false);
+                                Button deleteTranslationButton = new Button(localization["PhraseList:delete_button"]);
+                                deleteTranslationButton.OnPressed += (_o, _args) =>
+                                {
+                                    phrase.DeleteTranslation(translation);
+                                    phraseInfoButtons.RemoveVerticalLine(infoInterface.Position.Item1);
+                                    // Таргет на кнопку назад не перемещаем, т.к. при удалении всех переводов удаляется и фраза,
+                                    // поэтому нужно вернуться на предыдущий интерфейс и очистить там строку с фразой
+                                    if (infoInterface.Position.Item1 > 1)
+                                    {
+                                        infoInterface.Position = (infoInterface.Position.Item1 - 1, infoInterface.Position.Item2);
+                                    }
+                                    if (phrase.Deleted && currentInterface is ButtonInterface _currentInterface)
+                                    {
+                                        _currentInterface.Buttons.RemoveVerticalLine(_currentInterface.Position.Item1);
+                                        _currentInterface.Position = (_currentInterface.Position.Item1 - 1, _currentInterface.Position.Item2);
+                                    }
+                                    SerializeDataContainer();
+                                };
+                                phraseInfoButtons.AddButton(currentVerticalLine, 1, translationButton);
+                                phraseInfoButtons.AddButton(currentVerticalLine++, 2, deleteTranslationButton);
+                            }
+                            // Добавляем кнопку назад
+                            Button backButton = new Button(localization["PhraseList:back_button"]);
+                            phraseInfoButtons.AddButton(currentVerticalLine, 1, backButton);
+                            infoInterface.OnPressingEnter += (o, args) =>
+                            {
+                                if (o is ButtonInterface _infoInterface && ReferenceEquals(backButton, _infoInterface.Target))
+                                {
+                                    _infoInterface.StopSinceNextFrame();
+                                }
+                            };
+                            infoInterface.OnPressedEnter += (o, args) =>
+                            {
+                                if (o is ButtonInterface _infoInterface && _infoInterface.Buttons.ButtonCount <= 1)
+                                {
+                                    _infoInterface.StopSinceNextFrame();
+                                }
+                            };
+                            infoInterface.Display().Wait();
                         };
                         phraseButtons.AddButton(phraseButtons.VerticalLineCount + 1, 1, phraseButton);
                         // Добавляем кнопку редактирования фразы

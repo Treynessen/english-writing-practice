@@ -32,10 +32,16 @@ namespace Treynessen.EnglishPractice
             currentInterface = new ButtonInterface(
                 buttons: buttons,
                 controlKeyContainer: controlKeyContainer,
-                getTitle: () => $"{programName} - {localization["SoundSettings:SectionName"]}",
-                soundEffect: () => soundEffect
+                getTitle: () => $"{programName} - {localization["SoundSettings:section_name"]}",
+                withSoundEffect: () => soundEffect
             );
-            (currentInterface as ButtonInterface).StopAfterClickedEnterKey += () => currentSection != Section.SoundSettings;
+            (currentInterface as ButtonInterface).OnPressedEnter += (o, args) =>
+            {
+                if (currentSection != Section.SoundSettings)
+                {
+                    (o as ButtonInterface)?.StopSinceNextFrame();
+                }
+            };
         }
     }
 }

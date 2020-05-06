@@ -26,7 +26,7 @@ namespace Treynessen.EnglishPractice
                 new TextInputtingInterface.VariableInfoPair { Variable = phrase, Info = textForPhrase},
                 new TextInputtingInterface.VariableInfoPair { Variable = translation, Info = textForTranslation}
             };
-            currentInterface = new TextInputtingInterface(pairs, successAdded, () => $"{programName} - {localization["AddPhrase:SectionName"]}");
+            currentInterface = new TextInputtingInterface(pairs, successAdded, () => $"{programName} - {localization["AddPhrase:section_name"]}");
             (currentInterface as TextInputtingInterface).OnGettingData += (data) =>
             {
                 phrase = data.ElementAt(0);

@@ -11,14 +11,20 @@ namespace Treynessen.EnglishPractice
     {
         private void OpenLocalizationSettingsSection()
         {
-            Buttons buttons= BuildLocalizationButtons();
+            Buttons buttons = BuildLocalizationButtons();
             currentInterface = new ButtonInterface(
                 buttons: buttons,
                 controlKeyContainer: controlKeyContainer,
-                getTitle: () => $"{programName} - {localization["LocalizationSettings:SectionName"]}",
-                soundEffect: () => soundEffect
+                getTitle: () => $"{programName} - {localization["LocalizationSettings:section_name"]}",
+                withSoundEffect: () => soundEffect
             );
-            (currentInterface as ButtonInterface).StopAfterClickedEnterKey += () => currentSection != Section.LocalizationSettings;
+            (currentInterface as ButtonInterface).OnPressedEnter += (o, args) =>
+            {
+                if (currentSection != Section.LocalizationSettings)
+                {
+                    (o as ButtonInterface)?.StopSinceNextFrame();
+                }
+            };
         }
 
         private Buttons BuildLocalizationButtons()

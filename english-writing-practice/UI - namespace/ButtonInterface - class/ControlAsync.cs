@@ -7,7 +7,6 @@ namespace Treynessen.UI
     {
         private Task ControlAsync()
         {
-            bool stopped = false;
             return Task.Run(() =>
             {
                 while (!stopped)
@@ -15,41 +14,42 @@ namespace Treynessen.UI
                     bool callUpdateInterface = false;
                     ConsoleKeyInfo pressedKeyInfo = Console.ReadKey(true);
                     if ((buttons.VerticalControlAvailable() && VerticalKeyPressed(pressedKeyInfo))
-                    || (buttons.HorizontalControlAvailable(verticalOperationNum) && HorizontalKeyPressed(pressedKeyInfo)))
+                    || (buttons.HorizontalControlAvailable(verticalPosition) && HorizontalKeyPressed(pressedKeyInfo)))
                     {
-                        if (soundEffect()) Console.Beep(2000, 80);
+                        if (withSoundEffect()) Console.Beep(2000, 80);
                         if (upKey.HasValue && pressedKeyInfo.Key == upKey.Value)
                         {
-                            verticalOperationNum = buttons.GetPreviousVerticalLineId(verticalOperationNum);
-                            if (horizontalOperationNum > buttons.GetHorizontalButtonCount(verticalOperationNum))
+                            verticalPosition = buttons.GetPreviousVerticalLineId(verticalPosition);
+                            if (horizontalPosition > buttons.GetHorizontalButtonCount(verticalPosition))
                             {
-                                horizontalOperationNum = buttons.GetHorizontalButtonCount(verticalOperationNum);
+                                horizontalPosition = buttons.GetHorizontalButtonCount(verticalPosition);
                             }
                         }
                         else if (downKey.HasValue && pressedKeyInfo.Key == downKey.Value)
                         {
-                            verticalOperationNum = buttons.GetNextVerticalLineId(verticalOperationNum);
-                            if (horizontalOperationNum > buttons.GetHorizontalButtonCount(verticalOperationNum))
+                            verticalPosition = buttons.GetNextVerticalLineId(verticalPosition);
+                            if (horizontalPosition > buttons.GetHorizontalButtonCount(verticalPosition))
                             {
-                                horizontalOperationNum = buttons.GetHorizontalButtonCount(verticalOperationNum);
+                                horizontalPosition = buttons.GetHorizontalButtonCount(verticalPosition);
                             }
                         }
                         else if (leftKey.HasValue && pressedKeyInfo.Key == leftKey.Value)
                         {
-                            horizontalOperationNum = buttons.GetPreviousHorizontalButtonId(verticalOperationNum, horizontalOperationNum);
+                            horizontalPosition = buttons.GetPreviousHorizontalButtonId(verticalPosition, horizontalPosition);
                         }
                         else if (rightKey.HasValue && pressedKeyInfo.Key == rightKey.Value)
                         {
-                            horizontalOperationNum = buttons.GetNextHorizontalButtonId(verticalOperationNum, horizontalOperationNum);
+                            horizontalPosition = buttons.GetNextHorizontalButtonId(verticalPosition, horizontalPosition);
                         }
                         callUpdateInterface = true;
                     }
                     else if (enterKey.HasValue && pressedKeyInfo.Key == enterKey.Value)
                     {
-                        Button pressedButton = buttons[verticalOperationNum, horizontalOperationNum];
-                        if (soundEffect() && pressedButton.Active) Console.Beep(700, 80);
+                        Button pressedButton = Target;
+                        if (withSoundEffect() && pressedButton.Active) Console.Beep(700, 80);
+                        OnPressingEnter?.Invoke(this, EventArgs.Empty);
                         pressedButton.Press();
-                        stopped = StopAfterClickedEnterKey == null ? true : StopAfterClickedEnterKey();
+                        OnPressedEnter?.Invoke(this, EventArgs.Empty);
                         callUpdateInterface = !stopped;
                     }
                     if (callUpdateInterface) UpdateInterface();

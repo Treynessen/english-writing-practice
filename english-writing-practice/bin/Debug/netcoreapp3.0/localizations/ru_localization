@@ -1,6 +1,6 @@
 Name=Русский
 [Menu]
-SectionName=Меню
+section_name=Меню
 button_1_1=Тренировка
 button_2_1=Добавить фразу
 button_3_1=Список фраз
@@ -9,14 +9,14 @@ button_5_1=Настройка звука
 button_6_1=Выйти
 
 [AddPhrase_LanguageChoice]
-SectionName=Добавление фразы - Выбор языка
+section_name=Добавление фразы - Выбор языка
 header=Выберите язык добавляемой фразы:
 button_1_1=Русский
 button_2_1=Английский
 button_3_1=Назад
 
 [AddPhrase]
-SectionName=Добавление фразы
+section_name=Добавление фразы
 phrase_in_russian=Фраза на русском
 phrase_in_english=Фраза на английском
 info_1=введите пустое значение, чтобы вернуться назад
@@ -25,18 +25,19 @@ phrase_added=Фраза добавлена
 press_any_key=Нажмите на любую кнопку для продолжения
 
 [PhraseList_LanguageChoice]
-SectionName=Список фраз - Выбор языка
+section_name=Список фраз - Выбор языка
 header=Выберите язык отображаемых фраз:
 button_1_1=Русский
 button_2_1=Английский
 button_3_1=Назад
 
 [PhraseList]
-SectionName=Список фраз
+section_name=Список фраз
 show_all_button=Отобразить все фразы
 back_button=Назад
 edit_button=Изменить
 delete_button=Удалить
+phrase_info=Информация о фразе
 phrase=Фраза
 translations=Перевод
 input_new_phrase=Новое значение
@@ -44,11 +45,11 @@ current_phrase=текущая фраза -
 input_empty_to_exit=Для выхода введите пустое значение
 
 [LocalizationSettings]
-SectionName=Настройка языка
+section_name=Настройка языка
 button_1_1=Назад
 
 [SoundSettings]
-SectionName=Настройка звука
+section_name=Настройка звука
 button_1_1=Включить звук
 button_2_1=Выключить звук
 button_3_1=Назад

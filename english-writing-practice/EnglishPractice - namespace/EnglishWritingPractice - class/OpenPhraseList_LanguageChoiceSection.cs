@@ -13,11 +13,11 @@ namespace Treynessen.EnglishPractice
             currentInterface = new ButtonInterface(
                 buttons: buttons,
                 controlKeyContainer: controlKeyContainer,
-                getTitle: () => $"{programName} - {localization["PhraseList_LanguageChoice:SectionName"]}",
-                soundEffect: () => soundEffect,
+                getTitle: () => $"{programName} - {localization["PhraseList_LanguageChoice:section_name"]}",
+                withSoundEffect: () => soundEffect,
                 headerText: localization["PhraseList_LanguageChoice:header"]
             );
-            (currentInterface as ButtonInterface).StopAfterClickedEnterKey += () => true;
+            (currentInterface as ButtonInterface).OnPressedEnter += (o, args) => (o as ButtonInterface)?.StopSinceNextFrame();
         }
     }
 }

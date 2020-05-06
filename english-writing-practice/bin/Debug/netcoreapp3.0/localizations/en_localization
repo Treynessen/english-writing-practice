@@ -1,6 +1,6 @@
 Name=English
 [Menu]
-SectionName=Menu
+section_name=Menu
 button_1_1=Training
 button_2_1=Add phrase
 button_3_1=Phrase list
@@ -9,14 +9,14 @@ button_5_1=Sound settings
 button_6_1=Exit
 
 [AddPhrase_LanguageChoice]
-SectionName=Add phrase - Language choice
+section_name=Add phrase - Language choice
 header=Select the language of added phrase:
 button_1_1=Russian
 button_2_1=English
 button_3_1=Back
 
 [AddPhrase]
-SectionName=Add phrase
+section_name=Add phrase
 phrase_in_english=Phrase in English
 phrase_in_russian=Phrase in Russian
 info_1=put an empty value to go back
@@ -25,25 +25,31 @@ phrase_added=The phrase have added
 press_any_key=Press any key to continue
 
 [PhraseList_LanguageChoice]
-SectionName=Phrase list - Language choice
+section_name=Phrase list - Language choice
 header=Choose phrase's language:
 button_1_1=Russian
 button_2_1=English
 button_3_1=Back
 
 [PhraseList]
-SectionName=Phrase list
+section_name=Phrase list
 show_all_button=Show all phrases
 back_button=Back
 edit_button=Edit
 delete_button=Delete
+phrase_info=Phrase info
+phrase=Phrase
+translations=Translations
+input_new_phrase=Input new phrase
+current_phrase=current phrase -
+input_empty_to_exit=Input empty to exit
 
 [LocalizationSettings]
-SectionName=Localization settings
+section_name=Localization settings
 button_1_1=Back
 
 [SoundSettings]
-SectionName=Sound settings
+section_name=Sound settings
 button_1_1=Sound on
 button_2_1=Sound off
 button_3_1=Back

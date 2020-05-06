@@ -5,14 +5,15 @@ namespace Treynessen.UI
     public partial class ButtonInterface : IUserInterface
     {
         private Func<string> getTitle;
+        private bool stopped = false;
         private ConsoleKey? leftKey, rightKey, upKey, downKey, enterKey;
         private ConsoleColor unselectedButton_textColor = IUserInterface.DefaultTextColor;
         private ConsoleColor unselectedButton_selectionColor = IUserInterface.DefaultBackgroundColor;
         private ConsoleColor selectedButton_textColor = ConsoleColor.White;
         private ConsoleColor selectedText_selectionColor = ConsoleColor.DarkMagenta;
         private Buttons buttons;
-        private int verticalOperationNum = 1, horizontalOperationNum = 1;
-        private Func<bool> soundEffect;
+        private int verticalPosition = 1, horizontalPosition = 1;
+        private Func<bool> withSoundEffect;
         private string headerText, footerText;
 
         public Buttons Buttons
@@ -29,7 +30,7 @@ namespace Treynessen.UI
         }
         public (int, int) Position
         {
-            get => (verticalOperationNum, horizontalOperationNum);
+            get => (verticalPosition, horizontalPosition);
             set
             {
                 if (!buttons.VerticalLineExists(value.Item1))
@@ -40,15 +41,17 @@ namespace Treynessen.UI
                 {
                     throw new ArgumentException("Horizontal position is incorrect");
                 }
-                (verticalOperationNum, horizontalOperationNum) = value;
+                (verticalPosition, horizontalPosition) = value;
                 UpdateInterface();
             }
         }
+        public Button Target => buttons[Position];
 
-        public event Func<bool> StopAfterClickedEnterKey;
+        public event EventHandler OnPressingEnter;
+        public event EventHandler OnPressedEnter;
 
         public ButtonInterface(Buttons buttons, ControlKeyContainer controlKeyContainer,
-            Func<string> getTitle, Func<bool> soundEffect,
+            Func<string> getTitle, Func<bool> withSoundEffect,
             string headerText = null, string footerText = null)
         {
             leftKey = controlKeyContainer.LeftKey;
@@ -57,8 +60,9 @@ namespace Treynessen.UI
             downKey = controlKeyContainer.DownKey;
             enterKey = controlKeyContainer.EnterKey;
             this.getTitle = getTitle;
+            if (buttons == null) throw new ArgumentException("Button container can't be null");
             this.buttons = buttons;
-            this.soundEffect = soundEffect;
+            this.withSoundEffect = withSoundEffect;
             this.headerText = headerText;
             this.footerText = footerText;
             Console.CursorVisible = false;
