@@ -49,6 +49,7 @@ namespace Treynessen.UI
 
         public event EventHandler OnPressingEnter;
         public event EventHandler OnPressedEnter;
+        public event EventHandler OnStopped;
 
         public ButtonInterface(Buttons buttons, ControlKeyContainer controlKeyContainer,
             Func<string> getTitle, Func<bool> withSoundEffect,

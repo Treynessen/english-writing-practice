@@ -8,11 +8,11 @@ namespace Treynessen.EnglishPractice
     public partial class EnglishWritingPractice
     {
         // Получение кнопок для текущего раздела из файла с локализацией
-        private Buttons BuildSectionButtons()
+        private Buttons BuildSectionButtons(string sectionName)
         {
             Buttons buttons = new Buttons();
             Regex regex = new Regex(@"^button_(?<verticalLineId>\d+)_(?<horizontalButtonId>\d+)$", RegexOptions.IgnoreCase);
-            var buttonDatas = from section in localization.GetSection(currentSection.ToString()).GetChildren()
+            var buttonDatas = from section in localization.GetSection(sectionName).GetChildren()
                               let match = regex.Match(section.Key)
                               where match.Success
                               let verticalLineId = Convert.ToInt32(match.Groups["verticalLineId"].Value)

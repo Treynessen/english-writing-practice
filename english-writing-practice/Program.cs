@@ -28,7 +28,7 @@ class Program
             RuPhrasesDb = new LinkedList<RuPhraseAndTranslation>(),
             EnPhrasesDb = new LinkedList<EnPhraseAndTranslation>()
         };
-        EnglishWritingPractice englishWritingPractice = new EnglishWritingPractice(container);
+        EnglishWritingPractice englishWritingPractice = new EnglishWritingPractice("dictionary.data");
         ConsoleHelper.SetSignalHandler(signal =>
         {
             if (signal == ConsoleSignal.CtrlBreak || signal == ConsoleSignal.Close

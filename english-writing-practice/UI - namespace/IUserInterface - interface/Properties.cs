@@ -6,5 +6,7 @@ namespace Treynessen.UI
     {
         protected static ConsoleColor DefaultTextColor => ConsoleColor.DarkRed;
         protected static ConsoleColor DefaultBackgroundColor => ConsoleColor.White;
+
+        event EventHandler OnStopped;
     }
 }

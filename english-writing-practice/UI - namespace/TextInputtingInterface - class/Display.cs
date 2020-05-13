@@ -6,47 +6,52 @@ namespace Treynessen.UI
 {
     public partial class TextInputtingInterface
     {
-        public Task Display()
+        public async Task Display()
         {
-            Console.Clear();
-            bool exitInterface = false;
-            while (!exitInterface)
+            await Task.Run(() =>
             {
-                for (int i = 0; i < variableInfoPairs.Length; ++i)
+                Console.Clear();
+                Console.Title = getTitle();
+                while (!stopped)
                 {
-                    Console.WriteLine($"{variableInfoPairs[i].Info}");
-                    variableInfoPairs[i].Variable = Console.ReadLine();
-                    if (string.IsNullOrEmpty(variableInfoPairs[i].Variable))
+                    for (int i = 0; i < variableInfoPairs.Length; ++i)
                     {
-                        if (i == 0)
+                        Console.WriteLine($"{variableInfoPairs[i].Info}");
+                        variableInfoPairs[i].Variable = Console.ReadLine();
+                        if (string.IsNullOrEmpty(variableInfoPairs[i].Variable))
                         {
-                            exitInterface = true;
-                            break;
-                        }
-                        else
-                        {
-                            Console.Clear();
-                            int j = 0;
-                            for (; j < i - 1; ++j)
+                            if (i == 0)
                             {
-                                Console.WriteLine($"{variableInfoPairs[j].Info}");
-                                Console.WriteLine(variableInfoPairs[j].Variable);
+                                Stop();
+                                break;
                             }
-                            i = i - 2;
+                            else
+                            {
+                                Console.Clear();
+                                int j = 0;
+                                for (; j < i - 1; ++j)
+                                {
+                                    Console.WriteLine($"{variableInfoPairs[j].Info}");
+                                    Console.WriteLine(variableInfoPairs[j].Variable);
+                                }
+                                i = i - 2;
+                            }
                         }
                     }
+                    if (!stopped)
+                    {
+                        OnGettingData?.Invoke(variableInfoPairs.Select(vi => vi.Variable));
+                        Console.WriteLine(successfulInputtingMsg);
+                        Console.ReadKey();
+                        Console.Clear();
+                    }
                 }
-                if (!exitInterface)
+                if (!stopped)
                 {
-                    OnGettingData?.Invoke(variableInfoPairs.Select(vi => vi.Variable));
-                    Console.WriteLine(successfulInputtingMsg);
-                    Console.ReadKey();
-                    Console.Clear();
+                    OnEnding?.Invoke(this, EventArgs.Empty);
                 }
-            }
-            Console.CursorVisible = false;
-            OnEnding?.Invoke();
-            return Task.CompletedTask;
+                Console.CursorVisible = false;
+            });
         }
     }
 }

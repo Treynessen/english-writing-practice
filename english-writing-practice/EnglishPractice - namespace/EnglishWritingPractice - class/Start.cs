@@ -6,21 +6,14 @@ namespace Treynessen.EnglishPractice
     {
         public Task Start(bool innerWaiting = true)
         {
-            Task programTask = Task.Run(async () =>
+            mainInterface = BuildMenuSection();
+            Task mainTask = mainInterface.Display();
+            if(!innerWaiting)
             {
-                currentSection = Section.Menu;
-                while (!stopped)
-                {
-                    OpenSection();
-                    await currentInterface?.Display();
-                }
-            });
-            if (innerWaiting)
-            {
-                programTask.Wait();
-                return Task.CompletedTask;
+                return mainTask;
             }
-            else return programTask;
+            mainTask.Wait();
+            return Task.CompletedTask;
         }
     }
 }

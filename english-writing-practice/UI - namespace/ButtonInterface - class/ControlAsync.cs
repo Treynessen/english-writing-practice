@@ -46,11 +46,15 @@ namespace Treynessen.UI
                     else if (enterKey.HasValue && pressedKeyInfo.Key == enterKey.Value)
                     {
                         Button pressedButton = Target;
-                        if (withSoundEffect() && pressedButton.Active) Console.Beep(700, 80);
-                        OnPressingEnter?.Invoke(this, EventArgs.Empty);
-                        pressedButton.Press();
-                        OnPressedEnter?.Invoke(this, EventArgs.Empty);
-                        callUpdateInterface = !stopped;
+                        if (pressedButton.Active)
+                        {
+                            if (withSoundEffect()) Console.Beep(700, 80);
+                            OnPressingEnter?.Invoke(this, EventArgs.Empty);
+                            pressedButton.Press();
+                            OnPressedEnter?.Invoke(this, EventArgs.Empty);
+                            callUpdateInterface = !stopped;
+                        }
+                        else callUpdateInterface = false;
                     }
                     if (callUpdateInterface) UpdateInterface();
                 }

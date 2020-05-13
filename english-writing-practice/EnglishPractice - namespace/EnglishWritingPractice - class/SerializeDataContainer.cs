@@ -6,11 +6,11 @@ namespace Treynessen.EnglishPractice
     {
         private void SerializeDataContainer()
         {
-
             StaticFunctions.Serialize(
-                path: "dictionary.data",
+                path: dictionaryPath,
                 obj: dataContainer
             );
         }
+
     }
 }

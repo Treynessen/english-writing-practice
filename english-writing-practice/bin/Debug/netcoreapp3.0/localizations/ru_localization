@@ -1,5 +1,12 @@
-Name=Русский
-[Menu]
+localization_name=Русский
+[common]
+press_any_key_to_continue=Нажмите на любую кнопку для продолжения
+delete_button=Удалить
+back_button=Назад
+[preload]
+dictionary_not_found=Словарь не найден
+new_dictionary_created=Создан новый словарь
+[menu]
 section_name=Меню
 button_1_1=Тренировка
 button_2_1=Добавить фразу
@@ -7,48 +14,42 @@ button_3_1=Список фраз
 button_4_1=Настройка языка
 button_5_1=Настройка звука
 button_6_1=Выйти
-
-[AddPhrase_LanguageChoice]
-section_name=Добавление фразы - Выбор языка
+[add_phrase-language_selection]
+section_name=Добавить фразу - Выбор языка
 header=Выберите язык добавляемой фразы:
 button_1_1=Русский
 button_2_1=Английский
 button_3_1=Назад
-
-[AddPhrase]
-section_name=Добавление фразы
+[add_phrase]
+section_name=Добавить фразу - Добавление фразы
 phrase_in_russian=Фраза на русском
 phrase_in_english=Фраза на английском
 info_1=введите пустое значение, чтобы вернуться назад
 info_2=введите пустое значение, чтобы вернуться к вводу фразы
 phrase_added=Фраза добавлена
-press_any_key=Нажмите на любую кнопку для продолжения
-
-[PhraseList_LanguageChoice]
+[phrase_list-language_selection]
 section_name=Список фраз - Выбор языка
 header=Выберите язык отображаемых фраз:
 button_1_1=Русский
 button_2_1=Английский
 button_3_1=Назад
-
-[PhraseList]
+[phrase_list]
 section_name=Список фраз
 show_all_button=Отобразить все фразы
-back_button=Назад
 edit_button=Изменить
-delete_button=Удалить
-phrase_info=Информация о фразе
+[phrase_list-phrase_info]
+section_name=Список фраз - Информация о фразе
 phrase=Фраза
 translations=Перевод
+[phrase_list-editing_phrase]
+section_name=Список фраз - Изменение фразы
+input_empty_to_exit=Для выхода введите пустое значение
 input_new_phrase=Новое значение
 current_phrase=текущая фраза -
-input_empty_to_exit=Для выхода введите пустое значение
-
-[LocalizationSettings]
+phrase_was_edited=Фраза изменена
+[localization_setting]
 section_name=Настройка языка
-button_1_1=Назад
-
-[SoundSettings]
+[sound_setting_section]
 section_name=Настройка звука
 button_1_1=Включить звук
 button_2_1=Выключить звук

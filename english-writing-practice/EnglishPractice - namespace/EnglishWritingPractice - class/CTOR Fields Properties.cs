@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Microsoft.Extensions.Configuration;
 using Treynessen.UI;
 using Treynessen.Functions;
@@ -9,22 +10,22 @@ namespace Treynessen.EnglishPractice
     {
         private PhraseAndTranslationContainer dataContainer;
 
-        private string programName;
+        private string programName = "Language writing practice";
 
-        private Section currentSection;
-
-        private IUserInterface currentInterface;
-        private bool stopped = false;
+        private IUserInterface mainInterface;
 
         private ControlKeyContainer controlKeyContainer;
-        private bool soundEffect = false;
 
-        IConfiguration coreConfiguration;
-        IConfiguration localization;
+        private bool withSoundEffect;
 
-        public EnglishWritingPractice(PhraseAndTranslationContainer dataContainer)
+        private string dictionaryPath;
+        private IConfiguration coreConfiguration;
+        private IConfiguration localization;
+
+
+        public EnglishWritingPractice(string dictionaryPath)
         {
-            this.dataContainer = dataContainer;
+            Console.Title = programName;
             StaticFunctions.OpenConfig(
                 path: "config.ini",
                 configuration: out coreConfiguration
@@ -33,8 +34,20 @@ namespace Treynessen.EnglishPractice
                 path: $"localizations/{coreConfiguration["lang"].ToLower()}_localization",
                 configuration: out localization
             );
-            programName = "Language writing practice";
-            soundEffect = coreConfiguration["sound_effect"] != null && coreConfiguration["sound_effect"].Equals("true") ? true : false;
+            if (string.IsNullOrEmpty(dictionaryPath) || !File.Exists(dictionaryPath))
+            {
+                Console.WriteLine(localization["preload:dictionary_not_found"]);
+                Console.WriteLine(localization["preload:new_dictionary_has_created"]);
+                Console.Write(localization["common:press_any_key_to_continue"]);
+                Console.ReadKey();
+                this.dictionaryPath = "dictionary.data";
+            }
+            else
+            {
+                this.dictionaryPath = dictionaryPath;
+                DeserializeDataContainer();
+            }
+            withSoundEffect = Convert.ToBoolean(coreConfiguration["sound_effect"]);
             controlKeyContainer = new ControlKeyContainer
             {
                 LeftKey = ConsoleKey.LeftArrow,
