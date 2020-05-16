@@ -14,7 +14,7 @@ namespace Treynessen.UI
         private Buttons buttons;
         private int verticalPosition = 1, horizontalPosition = 1;
         private Func<bool> withSoundEffect;
-        private string headerText, footerText;
+        private Func<string> getHeaderText, getFooterText;
 
         public Buttons Buttons
         {
@@ -53,7 +53,7 @@ namespace Treynessen.UI
 
         public ButtonInterface(Buttons buttons, ControlKeyContainer controlKeyContainer,
             Func<string> getTitle, Func<bool> withSoundEffect,
-            string headerText = null, string footerText = null)
+            Func<string> getHeaderText = null, Func<string> getFooterText = null)
         {
             leftKey = controlKeyContainer.LeftKey;
             rightKey = controlKeyContainer.RightKey;
@@ -64,8 +64,8 @@ namespace Treynessen.UI
             if (buttons == null) throw new ArgumentException("Button container can't be null");
             this.buttons = buttons;
             this.withSoundEffect = withSoundEffect;
-            this.headerText = headerText;
-            this.footerText = footerText;
+            this.getHeaderText = getHeaderText;
+            this.getFooterText = getFooterText;
             Console.CursorVisible = false;
             Console.ForegroundColor = unselectedButton_textColor;
             Console.BackgroundColor = unselectedButton_selectionColor;

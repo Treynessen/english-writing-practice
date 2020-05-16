@@ -12,7 +12,7 @@ namespace Treynessen.EnglishPractice
             {
                 throw new ArgumentException("Passed translation parameter has been deleted");
             }
-            if (!Translations.Contains(translation))
+            if (!ContainsTranslation(translation))
             {
                 Translations.AddLast(translation);
             }
@@ -25,13 +25,11 @@ namespace Treynessen.EnglishPractice
             {
                 throw new InvalidOperationException("This object has been deleted");
             }
+            // Если перевод содержится в коллекции Translation, тогда завершаем работу метода
+            if (ContainsTranslation(translation)) return;
             var found = translationDb.FirstOrDefault(pt => pt.Phrase.Equals(translation, StringComparison.OrdinalIgnoreCase));
             if (found != null)
             {
-                if (Translations.Count() != 0 && Translations.Contains(found))
-                {
-                    return;
-                }
                 found.Translations.AddLast(this);
                 Translations.AddLast(found);
             }

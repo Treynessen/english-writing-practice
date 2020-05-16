@@ -14,7 +14,7 @@ namespace Treynessen.EnglishPractice
                 controlKeyContainer: controlKeyContainer,
                 getTitle: () => $"{programName} - {localization[$"{sectionName}:section_name"]}",
                 withSoundEffect: () => withSoundEffect,
-                headerText: localization[$"{sectionName}:header"]
+                getHeaderText: () => localization[$"{sectionName}:header"]
             );
             buttons[1].OnPressed += (o, args) =>
             {

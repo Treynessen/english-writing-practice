@@ -7,14 +7,16 @@ namespace Treynessen.EnglishPractice
     [Serializable]
     public abstract partial class PhraseAndTranslation
     {
-        public bool Deleted => !activeValue;
         private bool activeValue = true;
+        public bool Deleted => !activeValue;
 
         protected IEnumerable<PhraseAndTranslation> phraseDb;
         protected IEnumerable<PhraseAndTranslation> translationDb;
 
         public string Phrase { get; private set; }
         public LinkedList<PhraseAndTranslation> Translations { get; }
+
+        public int CorrectAnswersSuccessively { get; set; }
 
         public PhraseAndTranslation(string phrase, IEnumerable<PhraseAndTranslation> phraseDb,
             IEnumerable<PhraseAndTranslation> translationDb)

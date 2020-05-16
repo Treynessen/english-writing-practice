@@ -17,7 +17,9 @@ namespace Treynessen.EnglishPractice
             );
             buttons[1].OnPressed += (o, args) =>
             {
-
+                IUserInterface training_ModeSelectionInterface = BuildTraining_ModeSelectionSection();
+                ConnectStoppedEvents(menuInterface, training_ModeSelectionInterface);
+                training_ModeSelectionInterface.Display().Wait();
             };
             buttons[2].OnPressed += (o, args) =>
             {

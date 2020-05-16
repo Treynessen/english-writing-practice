@@ -13,11 +13,7 @@ namespace Treynessen.EnglishPractice
             if (translationListOldCount == Translations.Count())
             {
                 // Если перевод не добавился, тогда проверяем содержался ли он уже в коллекции Translations
-                if (Translations.Count() != 0)
-                {
-                    PhraseAndTranslation found = Translations.FirstOrDefault(pt => pt.Phrase.Equals(translation, StringComparison.OrdinalIgnoreCase));
-                    if (found != null) return;
-                }
+                if (ContainsTranslation(translation)) return;
                 // Если перевода нет в Translations, значит этого объекта нет в translationsDb, поэтому необходимо создать его
                 RuPhraseAndTranslation ruPhrase = new RuPhraseAndTranslation(translation, this, RuPhrasesDb, EnPhrasesDb);
                 Translations.AddLast(ruPhrase);

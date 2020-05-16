@@ -14,7 +14,7 @@ namespace Treynessen.EnglishPractice
                 controlKeyContainer: controlKeyContainer,
                 getTitle: () => $"{programName} - {localization[$"{sectionName}:section_name"]}",
                 withSoundEffect: () => withSoundEffect,
-                headerText: $"{localization[$"{sectionName}:phrase"]}: {phrase.Phrase}\n{localization[$"{sectionName}:translations"]}:"
+                getHeaderText: () => $"{localization[$"{sectionName}:phrase"]}: {phrase.Phrase}\n{localization[$"{sectionName}:translations"]}:"
             );
             // Добавляем кнопки для удаления перевода
             int verticalLineId = 1;

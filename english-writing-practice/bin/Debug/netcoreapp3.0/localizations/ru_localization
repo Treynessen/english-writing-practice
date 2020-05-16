@@ -14,6 +14,24 @@ button_3_1=Список фраз
 button_4_1=Настройка языка
 button_5_1=Настройка звука
 button_6_1=Выйти
+[training-mode_selection]
+section_name=Тренировка - Выбор режима
+header=Выбор режима тренировки:
+button_1_1=Перевод с английского на русский
+button_2_1=Перевод с русского на английский
+button_3_1=Комбинированный
+button_4_1=Назад
+[training]
+section_name=Тренировка
+db_is_empty=База данных пуста
+phrase=Фраза
+input_translation=Введите перевод
+right=Верно!
+wrong=Введен неверный перевод
+it_is_variant_of_translation=Это один из вариантов перевода
+yes=Да
+no=Нет
+input_empty_to_exit=Для выхода введите пустое значение
 [add_phrase-language_selection]
 section_name=Добавить фразу - Выбор языка
 header=Выберите язык добавляемой фразы:

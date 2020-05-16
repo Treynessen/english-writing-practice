@@ -12,6 +12,7 @@ namespace Treynessen.UI
         private VariableInfoPair[] variableInfoPairs;
         private string successfulInputtingMsg;
 
+        public event EventHandler OnBeforeTyping;
         public event Action<IEnumerable<string>> OnGettingData;
         public event EventHandler OnEnding;
         public event EventHandler OnStopped;

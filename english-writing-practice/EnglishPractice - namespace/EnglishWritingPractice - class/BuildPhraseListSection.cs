@@ -9,7 +9,7 @@ namespace Treynessen.EnglishPractice
         {
             string sectionName = "phrase_list";
             Buttons headerButtons = BuildPhraseListHeaderButtons<T>(sectionName);
-            IUserInterface phraseListInterface = new ButtonInterface(
+            ButtonInterface phraseListInterface = new ButtonInterface(
                 buttons: headerButtons,
                 controlKeyContainer: controlKeyContainer,
                 getTitle: () => $"{programName} - {localization[$"{sectionName}:section_name"]}",
@@ -43,9 +43,8 @@ namespace Treynessen.EnglishPractice
                             // и поднимаем таргет наверх
                             if (phrase.Deleted)
                             {
-                                ButtonInterface _phraseListInterface = phraseListInterface as ButtonInterface;
-                                _phraseListInterface.Buttons.RemoveVerticalLine(_phraseListInterface.Position.Item1);
-                                _phraseListInterface.Position = (_phraseListInterface.Position.Item1 - 1, _phraseListInterface.Position.Item2);
+                                phraseListInterface.Buttons.RemoveVerticalLine(phraseListInterface.Position.Item1);
+                                phraseListInterface.Position = (phraseListInterface.Position.Item1 - 1, phraseListInterface.Position.Item2);
                             }
                         };
                         // Кнопка "Изменить фразу"
@@ -56,24 +55,22 @@ namespace Treynessen.EnglishPractice
                             editingPhraseInterface.Display().Wait();
                             // Обновляем значения кнопок
                             (headerButton as Button).Press();
-                            ButtonInterface _phraseListInterface = phraseListInterface as ButtonInterface;
-                            if (_phraseListInterface.Position.Item1 > _phraseListInterface.Buttons.VerticalLineCount)
+                            if (phraseListInterface.Position.Item1 > phraseListInterface.Buttons.VerticalLineCount)
                             {
-                                _phraseListInterface.Position = (_phraseListInterface.Buttons.VerticalLineCount, _phraseListInterface.Position.Item2);
+                                phraseListInterface.Position = (phraseListInterface.Buttons.VerticalLineCount, phraseListInterface.Position.Item2);
                             }
                         };
                         // Кнопка "Удалить фразу"
                         receivedPhraseButtons[receivedPhraseVerticalLineId, 3].OnPressed += (o, args) =>
                         {
-                            ButtonInterface _phraseListInterface = phraseListInterface as ButtonInterface;
                             phrase.Delete();
                             SerializeDataContainer();
-                            _phraseListInterface.Buttons.RemoveVerticalLine(_phraseListInterface.Position.Item1);
-                            _phraseListInterface.Position = (_phraseListInterface.Position.Item1 - 1, _phraseListInterface.Position.Item2);
+                            phraseListInterface.Buttons.RemoveVerticalLine(phraseListInterface.Position.Item1);
+                            phraseListInterface.Position = (phraseListInterface.Position.Item1 - 1, phraseListInterface.Position.Item2);
                         };
                     }
                     // Соединяем headerButtons и receivedPhraseButtons и передаем полученные кнопки объекту интерфейса
-                    (phraseListInterface as ButtonInterface).Buttons = Buttons.Union(headerButtons, receivedPhraseButtons);
+                    phraseListInterface.Buttons = Buttons.Union(headerButtons, receivedPhraseButtons);
                 };
             }
             return phraseListInterface;

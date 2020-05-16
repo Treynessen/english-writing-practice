@@ -8,9 +8,9 @@ namespace Treynessen.UI
         {
             Console.Clear();
             Console.Title = getTitle();
-            if (!string.IsNullOrEmpty(headerText))
+            if (getHeaderText != null)
             {
-                Console.WriteLine(headerText);
+                Console.WriteLine(getHeaderText());
             }
             for (int rowId = 1; rowId <= buttons.VerticalLineCount; ++rowId)
             {
@@ -32,9 +32,9 @@ namespace Treynessen.UI
                 }
                 Console.WriteLine();
             }
-            if (!string.IsNullOrEmpty(footerText))
+            if (getFooterText != null)
             {
-                Console.WriteLine(footerText);
+                Console.WriteLine(getFooterText());
             }
         }
     }
