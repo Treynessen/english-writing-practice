@@ -61,10 +61,11 @@ namespace Treynessen.EnglishPractice
                         getHeaderText: () => $"{variableInfoPairs[0].Info}\n{translation}\n{localization[$"{sectionName}:it_is_variant_of_translation"]}"
                     );
                     // Функция восстановления текста в консоли до входа в choiceInterface
-                    Action textRecovery = () =>
+                    Action stateRecovery = () =>
                     {
                         Console.Clear();
                         Console.WriteLine($"{variableInfoPairs[0].Info}\n{translation}");
+                        Console.CursorVisible = true;
                     };
                     // Кнопка "Да"
                     buttons[1].OnPressed += (o, args) =>
@@ -72,16 +73,14 @@ namespace Treynessen.EnglishPractice
                         training.GetPhrase().AddTranslation(translation);
                         correctTranslation = true;
                         choiceInterface.Stop();
-                        textRecovery();
-                        Console.CursorVisible = true;
+                        stateRecovery();
                     };
                     // Кнопка "Нет"
                     buttons[2].OnPressed += (o, args) =>
                     {
                         training.HandlerForIncorrectInput();
                         choiceInterface.Stop();
-                        textRecovery();
-                        Console.CursorVisible = true;
+                        stateRecovery();
                         Console.WriteLine($"{localization[$"{sectionName}:wrong"]}");
                     };
                     ConnectStoppedEvents(trainingInterface, choiceInterface);

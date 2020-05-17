@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using Treynessen.UI;
 using Treynessen.Functions;
@@ -41,6 +42,11 @@ namespace Treynessen.EnglishPractice
                 Console.Write(localization["common:press_any_key_to_continue"]);
                 Console.ReadKey();
                 this.dictionaryPath = "dictionary.data";
+                dataContainer = new PhraseAndTranslationContainer
+                {
+                    RuPhrasesDb = new LinkedList<RuPhraseAndTranslation>(),
+                    EnPhrasesDb = new LinkedList<EnPhraseAndTranslation>()
+                };
             }
             else
             {
