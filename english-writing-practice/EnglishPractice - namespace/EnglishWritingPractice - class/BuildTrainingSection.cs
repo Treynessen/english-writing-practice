@@ -42,14 +42,21 @@ namespace Treynessen.EnglishPractice
             };
             trainingInterface.OnGettingData += (translations) =>
             {
-                string translation = translations.ElementAt(0);
-                bool correctTranslation = training.CorrectTranslation(translation);
+                string inputtedTranslation = translations.ElementAt(0);
+                bool correctTranslation = training.CorrectTranslation(inputtedTranslation);
                 // При получении неверного значения спрашиваем у пользователя
                 // является ли это одним из вариантов перевода
                 // Для этого создаем ButtonInterface. В качестве header передаем 
                 // весь текст с консоли
                 if (!correctTranslation)
                 {
+                    string outputtedText = $"{variableInfoPairs[0].Info}\n{inputtedTranslation}\n" +
+                        $"{localization[$"{sectionName}:correct_translations"]}: ";
+                    for (var translationNode = training.GetPhrase().Translations.First;
+                    translationNode != null; translationNode = translationNode.Next)
+                    {
+                        outputtedText += $"\"{translationNode.Value.Phrase}\"{(translationNode.Next != null ? "; " : string.Empty)}";
+                    }
                     Buttons buttons = new Buttons();
                     buttons.AddButton(1, new Button(localization[$"{sectionName}:yes"]));
                     buttons.AddButton(2, new Button(localization[$"{sectionName}:no"]));
@@ -58,19 +65,19 @@ namespace Treynessen.EnglishPractice
                         controlKeyContainer: controlKeyContainer,
                         getTitle: () => $"{programName} - {localization[$"{sectionName}:section_name"]}",
                         withSoundEffect: () => withSoundEffect,
-                        getHeaderText: () => $"{variableInfoPairs[0].Info}\n{translation}\n{localization[$"{sectionName}:it_is_variant_of_translation"]}"
+                        getHeaderText: () => $"{outputtedText}\n{localization[$"{sectionName}:it_is_variant_of_translation"]}"
                     );
                     // Функция восстановления текста в консоли до входа в choiceInterface
                     Action stateRecovery = () =>
                     {
                         Console.Clear();
-                        Console.WriteLine($"{variableInfoPairs[0].Info}\n{translation}");
+                        Console.WriteLine(outputtedText);
                         Console.CursorVisible = true;
                     };
                     // Кнопка "Да"
                     buttons[1].OnPressed += (o, args) =>
                     {
-                        training.GetPhrase().AddTranslation(translation);
+                        training.GetPhrase().AddTranslation(inputtedTranslation);
                         correctTranslation = true;
                         choiceInterface.Stop();
                         stateRecovery();

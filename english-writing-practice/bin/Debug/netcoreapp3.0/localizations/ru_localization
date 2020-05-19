@@ -28,6 +28,7 @@ phrase=Фраза
 input_translation=Введите перевод
 right=Верно!
 wrong=Введен неверный перевод
+correct_translations=Верный перевод
 it_is_variant_of_translation=Это один из вариантов перевода
 yes=Да
 no=Нет
